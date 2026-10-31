@@ -338,6 +338,8 @@ sup.fn a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 .stat .v{display:block;font:600 52px/1 var(--display);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .stat p{margin:14px 0 0;font-size:15px;line-height:1.47;color:var(--ink2)}
 .stat p b{color:var(--ink);font-weight:400}
+.band .stat{background:var(--page)}
+.stats.stats-in{margin-top:28px}
 @media (min-width:900px){.stats{grid-template-columns:repeat(3,1fr);gap:20px;margin-top:80px}.stat{padding:36px 32px}.stat .v{font-size:72px}.stat p{font-size:17px}}
 
 /* device-style frame around the main simulation clip */
