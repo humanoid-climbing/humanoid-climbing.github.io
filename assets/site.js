@@ -1,4 +1,4 @@
-// Humanoid Wall Climbing project page: menu, reveal, lazy videos, highlights carousel, comparisons, card tracks, explorers, FAQ, maths.
+// Humanoid Wall Climbing project page: menu, reveal, lazy videos, highlights carousel, comparisons, card tracks, explorers, disclosures, chapters, maths.
 (() => {
   const d = document;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -249,30 +249,43 @@
     show(Math.max(0, tabs.findIndex(t => t.getAttribute('aria-selected') === 'true')));
     return { panels, show };
   });
+  /* ---------- disclosures: a track inside one measures itself once it opens ---------- */
+  d.querySelectorAll('details').forEach(x => x.addEventListener('toggle', () => {
+    if (x.open) x.querySelectorAll('[data-scroller]').forEach(s => s.sync());
+  }));
+
+  // a deep link into a panel or a closed disclosure opens it first
   const openHash = () => {
     const el = location.hash.length > 1 && d.getElementById(decodeURIComponent(location.hash.slice(1)));
-    const p = el && el.closest('.tabpanel');
-    if (!p) return;
-    explorers.forEach(x => { const i = x.panels.indexOf(p); if (i >= 0) x.show(i); });
+    if (!el) return;
+    const p = el.closest('.tabpanel');
+    const box = el.closest('details');
+    if (!p && !box) return;
+    if (p) explorers.forEach(x => { const i = x.panels.indexOf(p); if (i >= 0) x.show(i); });
+    if (box) box.open = true;
     el.scrollIntoView();
   };
   addEventListener('hashchange', openHash);
   openHash();
 
-  /* ---------- FAQ: expand or collapse all ---------- */
-  const faqAll = d.getElementById('faqAll');
-  if (faqAll) {
-    const items = [...d.querySelectorAll('#faqList details')];
-    const sync = () => {
-      const all = items.every(x => x.open);
-      faqAll.setAttribute('aria-expanded', String(all));
-      faqAll.firstChild.textContent = all ? 'Collapse all ' : 'Expand all ';
+  /* ---------- chapters: jump within a clip; the part playing is marked ---------- */
+  d.querySelectorAll('[data-chapters]').forEach(root => {
+    const v = d.getElementById(root.dataset.chapters);
+    const g = groups.find(x => x.vids.includes(v));
+    const marks = [...root.querySelectorAll('button')];
+    const times = marks.map(b => parseFloat(b.dataset.t));
+    const mark = () => {
+      let k = 0;
+      times.forEach((t, i) => { if (v.currentTime >= t - .05) k = i; });
+      marks.forEach((b, i) => b.setAttribute('aria-pressed', String(i === k)));
     };
-    faqAll.addEventListener('click', () => {
-      const open = !items.every(x => x.open);
-      items.forEach(x => { x.open = open; });
-      sync();
-    });
-    items.forEach(x => x.addEventListener('toggle', sync));
-  }
+    marks.forEach((b, i) => b.addEventListener('click', () => {
+      load(v);
+      const seek = () => { v.currentTime = times[i]; mark(); };
+      if (v.readyState >= 1) seek();
+      else v.addEventListener('loadedmetadata', seek, { once: true });
+      if (g) { g.held = false; run(g, true); } else play(v);
+    }));
+    v.addEventListener('timeupdate', mark);
+  });
 })();

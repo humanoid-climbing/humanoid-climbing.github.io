@@ -5,7 +5,11 @@ Links to `../` and `../images/` resolve to the homepage repository, `SXuanAlan.g
 
 - `index.html`: the page.
 - `assets/`: stylesheet and script (no build step).
-- `media/`: videos and their posters, figures. `pipeline.png` is rendered from the source slide figure `artifacts/MRGP.svg` in the code repository (cairosvg at 2400 px wide, 64 colours).
+- `media/`: videos and their posters, figures. From the code repository (`scr-phybot_mjlab`):
+  - `pipeline.png` is rendered from the slide figure `artifacts/MRGP.svg` (cairosvg at 2400 px wide, 64 colours).
+  - `unit-table.png` is drawn by `tools/unit_table_figure.py` from the packaged unit table and its bench trials; run it with that repository's environment.
+  - `human-climb.mp4` is `artifacts/human_climb.mp4`, cropped to 16:9 from the top and scaled to 1280 × 720, without sound.
+- `tools/`: scripts that regenerate figures.
 
 Preview locally from the folder: `python -m http.server`, then open <http://localhost:8000/>.
 Source slides in `external_references/` are not tracked.

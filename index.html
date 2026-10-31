@@ -4,17 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Humanoid Wall Climbing with Compliant Spines</title>
-<meta name="description" content="Ongoing project at Stanford: certified whole-body references under a probabilistic micro-spine contact model, compliant spine palms, and a teacher–student training pipeline, toward a humanoid that climbs vertical walls.">
+<meta name="description" content="A probabilistic model of micro-spine contact, spine palms designed with it, and whole-body references generated and certified under it, toward a humanoid that climbs vertical walls. Stanford University.">
 <meta name="author" content="Shixuan (Alan) Zhao">
 <link rel="canonical" href="https://sxuanalan.github.io/climbing/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Humanoid Wall Climbing with Compliant Spines">
-<meta property="og:description" content="Ongoing project: certified references for spine contact, a probabilistic micro-spine model and compliant spine palms for a humanoid that climbs walls.">
+<meta property="og:description" content="A probabilistic micro-spine model, compliant spine palms and certified whole-body references for a humanoid that climbs walls.">
 <meta property="og:url" content="https://sxuanalan.github.io/climbing/">
 <meta property="og:image" content="https://sxuanalan.github.io/climbing/media/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="A simulated humanoid with spine palms on its hands and feet climbing a wall, beside the title Humanoid Wall Climbing and an Ongoing project label.">
+<meta property="og:image:alt" content="A simulated humanoid with spine palms on its hands and feet climbing a wall, beside the title Humanoid Wall Climbing.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://sxuanalan.github.io/climbing/media/og.jpg">
 <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
@@ -36,20 +36,17 @@
 
 <nav class="nav" aria-label="Humanoid Wall Climbing">
   <a class="nav-title" href="#top"><span class="t-full">Humanoid Wall Climbing</span><span class="t-short">Wall Climbing</span></a>
-  <a class="chip-wip" href="#status" title="This is an ongoing project. See where it stands."><span class="wip-dot" aria-hidden="true"></span>Ongoing</a>
   <div class="explore">
     <button class="pill out" id="exploreBtn" type="button" aria-expanded="false" aria-controls="exploreMenu">Explore</button>
     <div class="explore-menu" id="exploreMenu" hidden>
-      <a href="#highlights">Highlights</a>
       <a href="#overview">Overview</a>
+      <a href="#model">Contact model</a>
+      <a href="#design">Palm design</a>
       <a href="#reference">Reference generation</a>
-      <a href="#physics">Micro-spine model</a>
-      <a href="#hardware">Hardware design</a>
-      <a href="#training">Training</a>
-      <a href="#sim">Simulation results</a>
-      <a href="#status">Status</a>
-      <a href="#faq">Questions</a>
-      <a href="#team">Team</a>
+      <a href="#policy">Policy learning</a>
+      <a href="#results">Results</a>
+      <a href="#supp">Supplementary</a>
+      <a href="#team">Citation</a>
     </div>
   </div>
   <a class="pill out hide-sm" href="../">Homepage</a>
@@ -61,21 +58,15 @@
 <!-- HERO -->
 <section class="hero" id="top">
   <div class="wrap">
-    <p class="notice rv"><span class="wip-dot" aria-hidden="true"></span><b>Ongoing project</b><span class="sep" aria-hidden="true">·</span>Updated Oct 30, 2026<span class="n-more"><span class="sep" aria-hidden="true">·</span>Results are preliminary</span></p>
     <p class="eyebrow rv">Humanoid Wall Climbing</p>
     <h1 class="hx rv">Walls are <br>terrain, too.</h1>
-    <p class="hero-sub rv">Whole-body references generated and certified under a probabilistic model of micro-spine contact, compliant spine palms to carry them out, and one policy distilled from a teacher for every skill, so a humanoid can climb vertical walls.</p>
+    <p class="hero-sub rv">A probabilistic model of micro-spine contact, spine palms designed with it, and whole-body references generated and certified under it, so a humanoid can learn to climb vertical walls.</p>
   </div>
   <div class="wrap-mid hero-stage">
     <div class="ph media rv" data-auto>
       <video data-src="media/hero-policy90.mp4" poster="media/hero-policy90.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="In simulation, a humanoid with spine palms on its hands and feet holds a vertical wall and steps its limbs through a climbing cycle."></video>
       <span class="tag sim"><i></i>Simulation · teacher policy · 90° wall</span>
       <button class="vbtn" type="button" aria-label="Pause the video"><svg viewBox="0 0 18 18" aria-hidden="true"><path class="i-pause" d="M4 2.5h3.4v13H4zM10.6 2.5H14v13h-3.4z" fill="currentColor"/><path class="i-play" d="M5 2.5v13l11-6.5z" fill="currentColor"/></svg></button>
-    </div>
-    <div class="buy">
-      <span class="wip-dot" aria-hidden="true"></span>
-      <p>Ongoing project.<span>Climbing works in simulation. Hardware trials are under way.</span></p>
-      <a class="cta" href="#status">Status</a>
     </div>
   </div>
 </section>
@@ -84,7 +75,7 @@
 <section class="sec band" id="highlights" aria-roledescription="carousel" aria-label="Highlights">
   <div class="wrap headrow">
     <h2 class="hl-head rv">Get the highlights.</h2>
-    <a class="lnk rv" href="#status">Where the project stands <span aria-hidden="true">›</span></a>
+    <a class="lnk rv" href="#overview">Read the overview <span aria-hidden="true">›</span></a>
   </div>
   <div class="track hl-track" id="hlTrack">
     <article class="hcard" aria-roledescription="slide" aria-label="1 of 3">
@@ -102,10 +93,10 @@
       </div>
     </article>
     <article class="hcard" aria-roledescription="slide" aria-label="3 of 3">
-      <h3>Real spines on a real stucco wall.<br>Climbing on hardware is next.</h3>
+      <h3>Micro-spines can carry a person up a concrete wall.<br>A professional climber, in earlier work from our lab.</h3>
       <div class="ph media">
-        <video data-src="media/stucco-spines.mp4" poster="media/stucco-spines.jpg" muted playsinline preload="none" disablepictureinpicture aria-label="Close-up of a row of spine units on an aluminum plate, dragged over the rough surface of the stucco test wall."></video>
-        <span class="tag hw"><i></i>Hardware</span>
+        <video data-src="media/human-climb.mp4" poster="media/human-climb.jpg" muted playsinline preload="none" disablepictureinpicture aria-label="On a safety rope, a climber scales the concrete-block wall of a building with a hand-held spine plate in each hand."></video>
+        <span class="tag hw"><i></i>Hardware · earlier work</span>
       </div>
     </article>
   </div>
@@ -120,24 +111,24 @@
   <div class="wrap-copy story-head">
     <p class="eyebrow rv">Overview</p>
     <h2 class="hx rv">Climb to work, <br>not just to reach.</h2>
-    <p class="lede rv">Damaged structures, bridges and utility poles need inspection and maintenance on rough surfaces nobody prepared for a robot. A humanoid already walks and works with its hands on the ground; we want the same body on the wall. <b>Micro-spines grip such surfaces, but they hold only when loaded the right way, and they let go at random. Everything below is built around that fact.</b></p>
+    <p class="lede rv">Damaged structures, bridges and utility poles need inspection and maintenance on rough surfaces nobody prepared for a robot. A humanoid already walks and works with its hands on the ground; we want the same body on the wall. <b>Micro-spines grip such surfaces, but they hold only when loaded the right way, and they let go at random. We model that randomness, design the palm with the model, and generate every motion the robot learns under it.</b></p>
   </div>
   <div class="wrap qtiles">
-    <a class="qtile rv" href="#reference"><span class="qk">Contribution 1 · Method</span><b>A generator of whole-body references that the spines can actually hold.</b><span class="more">Reference generation <span aria-hidden="true">›</span></span></a>
-    <a class="qtile rv" href="#physics"><span class="qk">Contribution 2 · Model</span><b>A probabilistic model of how a twelve-unit spine palm holds and fails.</b><span class="more">Micro-spine model <span aria-hidden="true">›</span></span></a>
-    <a class="qtile rv" href="#hardware"><span class="qk">Contribution 3 · Design</span><b>Compliant spine palms, and where they hinge on the limb.</b><span class="more">Hardware design <span aria-hidden="true">›</span></span></a>
+    <a class="qtile rv" href="#model"><span class="qk">Contribution · Model</span><b>A probabilistic model of how a twelve-unit spine palm holds and fails.</b><span class="more">Contact model <span aria-hidden="true">›</span></span></a>
+    <a class="qtile rv" href="#design"><span class="qk">Contribution · Design</span><b>Compliant spine palms, hinged where the model says they hold.</b><span class="more">Palm design <span aria-hidden="true">›</span></span></a>
+    <a class="qtile rv" href="#reference"><span class="qk">Contribution · Method</span><b>A generator of whole-body references that the spines can actually hold.</b><span class="more">Reference generation <span aria-hidden="true">›</span></span></a>
   </div>
   <div class="wrap-mid block">
     <article class="stage rv">
       <p class="stage-k">How the parts fit</p>
       <h3>From contact model to deploy policy.</h3>
       <ol class="chain">
-        <li><b>Micro-spine model</b><span>Measured unit limits, and a palm that fails unit by unit as load is shared again.</span></li>
-        <li><b>Reference generator</b><span>Whole-body dynamics under the model's own latch and release rules, then an independent certificate.</span></li>
-        <li><b>Skill teachers</b><span>One tracking teacher per certified reference, with privileged contact state.</span></li>
-        <li class="hot"><b>One deploy policy</b><span>Distilled from all teachers; proprioception and an operator's skill command only.</span></li>
+        <li><b>Contact model</b><span>Measured unit strengths, and a palm that fails unit by unit as its load is shared again.</span></li>
+        <li><b>Palm design</b><span>Where the palm hinges on the limb, chosen with the model under hard build limits.</span></li>
+        <li class="hot"><b>Reference generation</b><span>Whole-body dynamics under the model's own latch and release rules, then an independent certificate.</span></li>
+        <li><b>Policy learning</b><span>A tracking teacher per certified reference, distilled into one student that deploys.</span></li>
       </ol>
-      <p class="stage-note"><b>One model, three uses.</b> The same spine model runs in the training simulator, decides contact events inside the generator, and scores each reference's reliability in its certificate.</p>
+      <p class="stage-note"><b>One model throughout.</b> The same spine model chooses the hinge, decides latches and releases inside the generator, scores each reference's reliability in its certificate, and runs in the training simulator.</p>
     </article>
   </div>
   <div class="wrap-mid">
@@ -149,10 +140,201 @@
   </div>
 </section>
 
+<!-- CONTACT MODEL -->
+<section class="sec band" id="model">
+  <div class="wrap-copy story-head">
+    <p class="eyebrow rv">Contact model</p>
+    <h2 class="hx rv">From one unit <br>to a whole palm.</h2>
+    <p class="lede rv">A spine palm is twelve spine units. We measured how a single unit lets go, then modeled how a palm fails as load shifts between its units. <b>The same model runs in the palm design, the reference generator, its certificate and the training simulator.</b></p>
+  </div>
+
+  <div class="wrap block explorer" data-tabs>
+    <div class="seg rv" role="tablist" aria-label="Contact model">
+      <button role="tab" type="button" id="mt-unit" aria-controls="mp-unit" aria-selected="true">Spine unit</button>
+      <button role="tab" type="button" id="mt-bench" aria-controls="mp-bench">Bench test</button>
+      <button role="tab" type="button" id="mt-model" aria-controls="mp-model">Palm model</button>
+      <button role="tab" type="button" id="mt-check" aria-controls="mp-check">Checked on a task</button>
+    </div>
+
+    <div class="tabpanel" role="tabpanel" id="mp-unit" aria-labelledby="mt-unit">
+      <p class="panel-lede">A spine catches on a tiny bump when it is dragged the right way. Real walls are irregular, so not every spine finds one at once. <b>Each spine rides on its own spring and moves on its own</b>, so more of them end up in contact.<sup class="fn"><a href="#fn1" aria-label="Footnote 1">1</a></sup></p>
+      <div class="palm-pair">
+        <div class="ph media">
+          <img src="media/palm-tile.jpg" width="1600" height="1200" loading="lazy" alt="One spine unit: a clear block holding a grid of small springs, each with a spine through it.">
+          <span class="tag hw"><i></i>One spine unit</span>
+        </div>
+        <div class="ph media" data-auto>
+          <video data-src="media/spine-assembly.mp4" poster="media/spine-assembly.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="Gloved hands assembling spines for a unit."></video>
+          <span class="tag hw"><i></i>Assembly</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tabpanel" role="tabpanel" id="mp-bench" aria-labelledby="mt-bench">
+      <div class="split">
+        <div class="ph media" style="aspect-ratio:16/9" data-auto>
+          <video data-src="media/unit-test.mp4" poster="media/unit-test.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="Close-up of one spine unit on a robot arm's flange, pressed against the top of a cinder block."></video>
+          <span class="tag hw"><i></i>Hardware · bench test</span>
+          <button class="vbtn" type="button" aria-label="Pause the video"><svg viewBox="0 0 18 18" aria-hidden="true"><path class="i-pause" d="M4 2.5h3.4v13H4zM10.6 2.5H14v13h-3.4z" fill="currentColor"/><path class="i-play" d="M5 2.5v13l11-6.5z" fill="currentColor"/></svg></button>
+        </div>
+        <div>
+          <p class="copy">A Rizon arm presses one unit onto a cinder block under force control. After a 10&nbsp;N preload, the shear and lateral loads ramp to a test point; the normal force then steps down through zero and into tension, 0.5&nbsp;N every 3&nbsp;s, until the unit lets go.</p>
+          <p class="copy"><b>With enough shear along the spines, a unit keeps holding while it is pulled away from the wall.</b> Against the rake it holds only while pressed.</p>
+        </div>
+      </div>
+      <figure class="tile" style="margin-top:20px">
+        <img src="media/unit-table.png" width="2640" height="880" loading="lazy" alt="Three plots of the single-unit table: pull-off force against shear with its strength quantiles and the trials, the failure probability against pull at four shear loads, and a map of the median pull-off force over shear and lateral load.">
+        <figcaption class="cap"><b>One unit, as the simulator draws it: 296 bench trials.</b> (a) Pull-off force at zero lateral load: the median and spread of the strength the plant draws for each unit, over the trials that let go under the pull. (b) The chance that a unit has let go as the pull rises, at four shear loads: \(\alpha\) in the palm model. (c) Median pull-off force over every tested shear and lateral load; below zero a unit holds only while pressed. The 21 trials that let go before the pull set the early-failure probability instead, and loads outside the tested range count as failures.</figcaption>
+      </figure>
+      <div class="jrow wrap-sm" style="margin-top:20px">
+        <figure class="full" style="--ar:1.333"><img src="media/bench-setup.jpg" width="1600" height="1200" loading="lazy" alt="The test bench: a white robot arm holding a spine unit against a cinder block on a lab table."></figure>
+        <figure style="--ar:1.5"><img src="media/bench-closeup.jpg" width="1600" height="1067" loading="lazy" alt="A spine unit mounted at the center of the arm's flange."></figure>
+        <figure style="--ar:1.5"><img src="media/bench-side.jpg" width="1600" height="1067" loading="lazy" alt="Side view of the unit's spines touching the cinder block."></figure>
+      </div>
+    </div>
+
+    <div class="tabpanel" role="tabpanel" id="mp-model" aria-labelledby="mt-model">
+      <div class="model in-panel">
+        <div class="model-head">
+          <h3 class="sub-head">Twelve units. Every way they can fail.</h3>
+          <p class="lede">The palm holds as long as enough units do. The model tracks which units still hold, how the load is shared among them, and every round in which they can let go.</p>
+        </div>
+        <div class="scroller" data-scroller>
+          <div class="scroller-bar">
+            <span class="count" aria-live="polite"></span>
+            <button class="arw prev" type="button" aria-label="Previous step"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="arw next" type="button" aria-label="Next step"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+          <div class="strack">
+            <div class="step">
+              <h4>Which units hold</h4>
+              <div class="eq">\[\begin{gathered}\mathbf E=(E_1,\dots,E_N)\\ E_i=1\ \text{effective},\quad E_i=0\ \text{failed}\end{gathered}\]</div>
+              <p>A palm has \(N=12\) units. Their strengths are independent draws from one measured distribution, but their failure probabilities differ, because each unit carries its own load. A failed unit stays out until the palm latches again.</p>
+            </div>
+            <div class="step">
+              <h4>How the load is shared</h4>
+              <div class="eq">\[\begin{gathered}\mathbf w=(F_x,F_y,F_z,M_x,M_y,M_z)^{\top}\\ \mathbf f_i=A_i(\mathbf e)\,\mathbf w\end{gathered}\]</div>
+              <p>The palm's wrench about the array centre: \(x\) along the rake, \(y\) lateral, \(z\) out of the wall, so \(F_z&gt;0\) pulls. \(A_i\) is rigid-palm, equal-stiffness bolt-group statics over the units still holding, so it changes whenever one fails; failed units carry nothing.</p>
+            </div>
+            <div class="step">
+              <h4>Early failure, screened once</h4>
+              <div class="eq">\[\begin{aligned}\beta_i&amp;=p_{\mathrm{early}}\big(f^{\mathrm{init}}_{xi},\,|f^{\mathrm{init}}_{yi}|\big)\\ p_0(\mathbf e)&amp;=\Pr\big(\mathbf E^{(0)}=\mathbf e\big)\\&amp;=\prod_{i=1}^{N}(1-\beta_i)^{e_i}\,\beta_i^{\,1-e_i}\end{aligned}\]</div>
+              <p>On a rough surface some units never catch: on the bench they let go while the shear and lateral load were still being applied, and \(p_{\mathrm{early}}\) is that share at each tested load. Each unit faces this Bernoulli trial once per latch, at its first load with every unit in place.</p>
+            </div>
+            <div class="step">
+              <h4>A strength kept for the whole latch</h4>
+              <div class="eq">\[\begin{gathered}C_i=Q\big(f_{xi},\,|f_{yi}|;\,U_i\big),\qquad U_i\overset{\mathrm{iid}}{\sim}\mathcal U(0,1)\\ \alpha_i(\mathbf f_i)=\Pr\{C_i&lt;f_{zi}\}\end{gathered}\]</div>
+              <p>\(Q\) is the measured inverse CDF of a unit's pull-off force at that shear and lateral load. A unit keeps its rank \(U_i\) through every load of a latch. It fails when its pull exceeds \(C_i\), or when its shear and lateral load leave the tested range.</p>
+            </div>
+            <div class="step">
+              <h4>Fail together, share again</h4>
+              <div class="eq">\[\begin{gathered}q_i=\frac{\max(0,\,\alpha_i-a_i)}{1-a_i},\qquad r_i=1-q_i\\ m_B=m\prod_{i\in B}q_i\prod_{j\in S\setminus B}r_j\end{gathered}\]</div>
+              <p>From a branch with mass \(m\) and survivors \(S\), exactly the subset \(B\) fails in the next round. Strengths persist, so \(q_i\) is conditional: \(a_i\) is the largest \(\alpha_i\) the unit has already held, and a load it has held before adds no hazard. All of \(B\) leaves before the load is shared again.</p>
+            </div>
+            <div class="step">
+              <h4>Sum the tree</h4>
+              <div class="eq">\[\begin{aligned}\pi(\mathbf e;\mathbf w)&amp;=\Pr\big(\mathbf E^{\mathrm{terminal}}=\mathbf e\mid\mathbf w\big)\\&amp;=\sum_{b\,:\,b\ \text{terminates at}\ \mathbf e} m_b\\ P_{\text{pad fail}}(\mathbf w)&amp;=\sum_{\mathbf e\in\mathcal D}\pi(\mathbf e;\mathbf w)\end{aligned}\]</div>
+              <p>A branch ends when a round removes no unit, or at the first release state. \(\mathcal D\) holds those states: fewer than three units, or units all on one line, which cannot carry a moment in every direction.</p>
+            </div>
+            <div class="step">
+              <h4>One realization per palm, on the GPU</h4>
+              <div class="eq">\[\begin{aligned}\pi(\mathbf e;\mathbf w)&amp;=\sum_{\mathbf e_0}p_0(\mathbf e_0)\\&amp;\quad\cdot\int_{[0,1]^N}\mathbf 1\big[T(\mathbf w,\mathbf e_0,\mathbf u)=\mathbf e\big]\,d\mathbf u\end{aligned}\]</div>
+              <p>\(T\) runs the cascade on fixed ranks from the screened state \(\mathbf e_0\). The simulator never evaluates \(\pi\): each latch draws its ranks and early-failure variates once, and one GPU thread runs \(T\) in every 10&nbsp;ms hold window, so the rollouts themselves sample \(\pi\). Only the load-independent geometry of all \(2^{12}=4096\) survivor sets is precomputed.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tabpanel" role="tabpanel" id="mp-check" aria-labelledby="mt-check">
+      <div class="narrow">
+        <p class="panel-lede">A cinder block flipped with a spine palm. <b>In simulation the palm touches down, latches, lifts the block and releases it, the same sequence as on the bench.</b></p>
+        <div class="pair" data-pair>
+          <div class="pair-grid stack-sm">
+            <figure class="pp">
+              <div class="pv"><video data-src="media/flip-real.mp4" poster="media/flip-real.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="A person hooks a hand-held spine palm onto the top edge of a cinder block and flips it upright."></video><span class="tag hw"><i></i>Bench</span></div>
+              <figcaption><b>Bench</b> a hand-held spine palm</figcaption>
+            </figure>
+            <figure class="pp">
+              <div class="pv"><video data-src="media/flip-sim.mp4" poster="media/flip-sim.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="The simulated humanoid squats, hooks its right-hand palm onto a block and flips it."></video><span class="tag sim"><i></i>Simulation</span></div>
+              <figcaption><b>Simulation</b> the humanoid, with the contact model</figcaption>
+            </figure>
+          </div>
+          <div class="pbar">
+            <p class="pcap">Same task, two worlds. The simulated run is a check of the contact model, not a learned policy.</p>
+            <button class="fplay" type="button" aria-label="Pause the videos"><svg viewBox="0 0 18 18" aria-hidden="true"><path class="i-pause" d="M4 2.5h3.4v13H4zM10.6 2.5H14v13h-3.4z" fill="currentColor"/><path class="i-play" d="M5 2.5v13l11-6.5z" fill="currentColor"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap-mid block" id="closer">
+    <div class="block-head">
+      <h3 class="sub-head rv">Take a closer look.</h3>
+      <p class="lede rv">One load case, round by round.</p>
+    </div>
+    <div class="anim-scroll rv">
+    <div class="anim" data-auto>
+      <video id="animVideo" data-src="media/survival-model.mp4" poster="media/survival-model.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="Animation of the palm model: a three-by-four spine palm under a pull and a shear load loses units round by round while a tree of outcomes grows beside it, then many sampled draws run down the same tree."></video>
+      <button class="vbtn" type="button" aria-label="Pause the animation"><svg viewBox="0 0 18 18" aria-hidden="true"><path class="i-pause" d="M4 2.5h3.4v13H4zM10.6 2.5H14v13h-3.4z" fill="currentColor"/><path class="i-play" d="M5 2.5v13l11-6.5z" fill="currentColor"/></svg></button>
+    </div>
+    </div>
+    <p class="fig-hint anim-hint">Swipe the animation sideways to read it.</p>
+    <div class="chapters rv" data-chapters="animVideo" role="group" aria-label="Jump to a part of the animation">
+      <button type="button" data-t="0" aria-pressed="true">Palm and load</button>
+      <button type="button" data-t="3" aria-pressed="false">Round 1</button>
+      <button type="button" data-t="12" aria-pressed="false">Rounds 2–4</button>
+      <button type="button" data-t="26" aria-pressed="false">Many samples</button>
+    </div>
+    <p class="cap rv">The 3 × 4 palm seen from outside the wall, under an 8&nbsp;N pull and 90&nbsp;N of shear. Each round, overloaded units fail together and the load is shared again. Followed exactly, the tree gives a 58.4% chance that the palm holds; 600 draws, run the way the simulator runs them, give 56.3%.</p>
+  </div>
+</section>
+
+<!-- PALM DESIGN -->
+<section class="sec" id="design">
+  <div class="wrap-copy story-head">
+    <p class="eyebrow rv">Palm design</p>
+    <h2 class="hx rv">Hinged where <br>the spines hold.</h2>
+    <p class="lede rv">Twelve units share one plate that turns freely on the limb, so the limb passes only a force through the hinge. <b>Where that hinge sits decides how the force reaches the units</b>: above the spine face, shear becomes a peeling moment that lifts the top row; off centre along the face, the normal force does the same.</p>
+  </div>
+  <div class="wrap block">
+    <div class="jrow wrap-sm palm-cad rv">
+      <figure style="--ar:.722"><img src="media/palm-cad.jpg" width="900" height="1247" loading="lazy" alt="CAD render of the assembled palm: twelve spine units in three rows of four on a plate above a cylindrical mount."><figcaption>Twelve units, in three rows of four, make one palm.</figcaption></figure>
+      <figure class="full" style="--ar:1.363"><img src="media/palm-exploded.jpg" width="1600" height="1174" loading="lazy" alt="Exploded CAD view of the palm: backing plate, unit rows, frame, mounts and a self-aligning bearing."><figcaption>Exploded view. A self-aligning bearing between palm and limb allows limited rotation instead of a rigid mount.</figcaption></figure>
+      <figure style="--ar:.757"><img src="media/sim-palms.jpg" width="634" height="838" loading="lazy" alt="Simulated humanoid on a wall with green spine palms on both hands and both feet."><figcaption>In simulation, palms on both hands and both feet.</figcaption></figure>
+    </div>
+  </div>
+  <div class="wrap-mid block">
+    <div class="block-head">
+      <h3 class="sub-head rv">The hinge, chosen with the model.</h3>
+      <p class="lede rv">Every design variable stays inside what can be built: hinge geometry, stop angles and spring rates come from real parts.</p>
+    </div>
+    <div class="rewards">
+      <article class="rcard rv">
+        <h4>Hinge height</h4>
+        <p>One palm under 150&nbsp;N of shear and no pull, 20,000 draws of unit strength. Height \(h\) is measured from the spine face.</p>
+        <dl>
+          <dt>\(h=0\)</dt><dd>holds with probability 0.985</dd>
+          <dt>3&nbsp;mm</dt><dd>0.907</dd>
+          <dt>5&nbsp;mm</dt><dd>0.223</dd>
+          <dt>10&nbsp;mm</dt><dd>0</dd>
+        </dl>
+        <p>Each millimetre of height adds about 0.6&nbsp;N of pull on every top-row unit at this shear.</p>
+      </article>
+      <article class="rcard rv">
+        <h4>A fork palm for the 27-DoF wrist</h4>
+        <p>Two columns of six units clamp the wrist roll axis, with the palm centre level with it. A pin hangs the palm in a U-fork: it tilts ±6° on its stops and slides 2&nbsp;mm along the normal on preloaded springs.</p>
+        <p>In fourteen corner load cases the forearm's three 9&nbsp;N·m motors stay within their limits; a rigid flange mount exceeds them. <b>Designed and checked in simulation.</b></p>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- REFERENCE GENERATION -->
 <section class="sec band" id="reference">
   <div class="wrap-copy story-head">
-    <p class="eyebrow rv">Contribution 1 · Reference generation</p>
+    <p class="eyebrow rv">Reference generation</p>
     <h2 class="hx rv">References the <br>spines can hold.</h2>
     <p class="lede rv">A spine palm latches only after enough preload, holds only while each unit stays inside its measured limits, and lets go when the load says so. A kinematic reference cannot know when any of that happens. <b>We generate each reference as a whole-body dynamic trajectory under the training simulator's own contact rules, then certify it from the stored trajectory alone.</b></p>
   </div>
@@ -340,267 +522,10 @@
   </div>
 </section>
 
-<!-- CONTACT MODEL -->
-<section class="sec" id="physics">
+<!-- POLICY LEARNING -->
+<section class="sec" id="policy">
   <div class="wrap-copy story-head">
-    <p class="eyebrow rv">Contribution 2 · Micro-spine model</p>
-    <h2 class="hx rv">From one unit <br>to a whole palm.</h2>
-    <p class="lede rv">We measured how a single spine unit lets go, then modeled how a twelve-unit palm fails as load shifts between its units. <b>The model runs inside the training simulator, the reference generator and the certificate.</b></p>
-  </div>
-
-  <div class="wrap block explorer" data-tabs>
-    <div class="seg rv" role="tablist" aria-label="Micro-spine model">
-      <button role="tab" type="button" id="mt-bench" aria-controls="mp-bench" aria-selected="true">Bench test</button>
-      <button role="tab" type="button" id="mt-model" aria-controls="mp-model">Palm model</button>
-      <button role="tab" type="button" id="mt-rounds" aria-controls="mp-rounds">Round by round</button>
-      <button role="tab" type="button" id="mt-check" aria-controls="mp-check">Checked on a task</button>
-    </div>
-
-    <div class="tabpanel" role="tabpanel" id="mp-bench" aria-labelledby="mt-bench">
-      <div class="split">
-        <div class="ph media" style="aspect-ratio:16/9" data-auto>
-          <video data-src="media/unit-test.mp4" poster="media/unit-test.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="Close-up of one spine unit on a robot arm's flange, pressed against the top of a cinder block."></video>
-          <span class="tag hw"><i></i>Hardware · bench test</span>
-          <button class="vbtn" type="button" aria-label="Pause the video"><svg viewBox="0 0 18 18" aria-hidden="true"><path class="i-pause" d="M4 2.5h3.4v13H4zM10.6 2.5H14v13h-3.4z" fill="currentColor"/><path class="i-play" d="M5 2.5v13l11-6.5z" fill="currentColor"/></svg></button>
-        </div>
-        <div>
-          <p class="copy">A Rizon arm presses one unit onto a cinder block under task-space force control. After a 10&nbsp;N normal preload, the lateral and shear forces ramp to a test point. The normal force then ramps down through zero and into tension until the unit lets go.</p>
-          <p class="copy"><b>With enough drag along the spines, the unit keeps holding even while it is pulled away from the surface.</b></p>
-        </div>
-      </div>
-      <figure class="tile" style="margin-top:20px">
-        <img src="media/limit-surface.png" width="2148" height="1320" loading="lazy" alt="Four plots of the normal force at detachment: a map over drag and lateral force, a fitted 3D limit surface, and two slices.">
-        <figcaption class="cap"><b>Normal force at detachment, from 100 trials.</b> Positive values are tension, negative compression. (a) The tested grid of drag and lateral loads, (b) the fitted limit surface, (c, d) slices at zero lateral and zero drag. Negative-lateral cells are mirrored by symmetry, not tested.</figcaption>
-      </figure>
-      <div class="jrow wrap-sm" style="margin-top:20px">
-        <figure class="full" style="--ar:1.333"><img src="media/bench-setup.jpg" width="1600" height="1200" loading="lazy" alt="The test bench: a white robot arm holding a spine unit against a cinder block on a lab table."></figure>
-        <figure style="--ar:1.5"><img src="media/bench-closeup.jpg" width="1600" height="1067" loading="lazy" alt="A spine unit mounted at the center of the arm's flange."></figure>
-        <figure style="--ar:1.5"><img src="media/bench-side.jpg" width="1600" height="1067" loading="lazy" alt="Side view of the unit's spines touching the cinder block."></figure>
-      </div>
-    </div>
-
-    <div class="tabpanel" role="tabpanel" id="mp-model" aria-labelledby="mt-model">
-      <div class="model in-panel">
-        <div class="model-head">
-          <h3 class="sub-head">Twelve units. Every way they can fail.</h3>
-          <p class="lede">The palm holds as long as enough units do. The model tracks which units still hold, how the load is shared among them, and every order in which they can let go.</p>
-        </div>
-        <div class="scroller" data-scroller>
-          <div class="scroller-bar">
-            <span class="count" aria-live="polite"></span>
-            <button class="arw prev" type="button" aria-label="Previous step"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-            <button class="arw next" type="button" aria-label="Next step"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          </div>
-          <div class="strack">
-            <div class="step">
-              <h4>Which units hold</h4>
-              <div class="eq">\[\begin{gathered}\mathbf E=(E_1,\dots,E_N)\\ E_i=1\ \text{effective},\quad E_i=0\ \text{failed}\end{gathered}\]</div>
-              <p>A palm has \(N=12\) units. We assume their failures are independent and identically distributed.</p>
-            </div>
-            <div class="step">
-              <h4>How the load is shared</h4>
-              <div class="eq">\[\begin{gathered}\mathbf w=(F_x,F_y,F_z,M_x,M_y,M_z)^{\top}\\ \mathbf f_i=A_i(\mathbf e)\,\mathbf w\end{gathered}\]</div>
-              <p>The palm's 6D wrench is split into a force on each unit. The split depends on which units still hold, so it changes whenever one fails.</p>
-            </div>
-            <div class="step">
-              <h4>Preload</h4>
-              <div class="eq">\[\begin{aligned}p_0(\mathbf e)&=\Pr\big(\mathbf E^{(0)}=\mathbf e\big)\\&=\prod_{i=1}^{N}(1-\beta_i)^{e_i}\,\beta_i^{\,1-e_i}\end{aligned}\]</div>
-              <p>On a random surface some units never engage. Each unit's preload failure is a Bernoulli trial with probability \(\beta_i\).</p>
-            </div>
-            <div class="step">
-              <h4>Fail, share again, repeat</h4>
-              <div class="eq">\[m_B=m\prod_{i\in B}q_i\prod_{j\in S\setminus B}r_j\]</div>
-              <p>From a branch with mass \(m\) and survivors \(S\), subset \(B\) fails in the next round with this mass, where \(q_i\) and \(r_j\) are failure and survival probabilities under the current load. The branches form a tree whose total mass is 1.</p>
-            </div>
-            <div class="step">
-              <h4>Sum the tree</h4>
-              <div class="eq">\[\begin{gathered}\pi(\mathbf e;\mathbf w)=\sum_{b\,:\,b\ \text{terminates at}\ \mathbf e} m_b\\ P_{\text{pad fail}}(\mathbf w)=\sum_{\mathbf e\in\mathcal D}\pi(\mathbf e;\mathbf w)\end{gathered}\]</div>
-              <p>Branches that end in the same final state add up to its probability. Summing over the failed final states \(\mathcal D\) gives the chance that the whole palm lets go.</p>
-            </div>
-            <div class="step">
-              <h4>Fast enough to train with</h4>
-              <div class="eq">\[\begin{aligned}\pi(\mathbf e;\mathbf w)&=\sum_{\mathbf e_0}p_0(\mathbf e_0)\\&\quad\cdot\int_{[0,1]^N}\mathbf 1\big[T(\mathbf w,\mathbf e_0,\mathbf u)=\mathbf e\big]\,d\mathbf u\end{aligned}\]</div>
-              <p>The simulator samples this integral: each latch draws the units' strengths \(\mathbf u\) once, and one GPU thread follows each palm through every failure round. Only the load-independent geometry of all \(2^{12}=4096\) surviving subsets is precomputed.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="tabpanel" role="tabpanel" id="mp-rounds" aria-labelledby="mt-rounds">
-      <div class="narrow look-in">
-        <div class="ph">
-          <video controls playsinline preload="none" src="media/survival-model.mp4" poster="media/survival-model.jpg" aria-label="Animation of the microspine joint survival model with simultaneous failures."></video>
-        </div>
-        <p class="cap">The pad seen from outside the wall: 12 units in 3 rows (shear) × 4 columns (lateral), under an 8&nbsp;N pull and 90&nbsp;N of shear. Each round, overloaded units fail together and the load is shared again. The tree on the right follows every possibility, and many samples give the probability that the pad holds.</p>
-      </div>
-    </div>
-
-    <div class="tabpanel" role="tabpanel" id="mp-check" aria-labelledby="mt-check">
-      <div class="narrow">
-        <p class="panel-lede">A cinder block flipped with a spine palm. <b>In simulation the palm touches down, latches, lifts the block and releases it, the same sequence as on the bench.</b></p>
-        <div class="pair" data-pair>
-          <div class="pair-grid stack-sm">
-            <figure class="pp">
-              <div class="pv"><video data-src="media/flip-real.mp4" poster="media/flip-real.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="A person hooks a hand-held spine palm onto the top edge of a cinder block and flips it upright."></video><span class="tag hw"><i></i>Bench</span></div>
-              <figcaption><b>Bench</b> a hand-held spine palm</figcaption>
-            </figure>
-            <figure class="pp">
-              <div class="pv"><video data-src="media/flip-sim.mp4" poster="media/flip-sim.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="The simulated humanoid squats, hooks its right-hand palm onto a block and flips it."></video><span class="tag sim"><i></i>Simulation</span></div>
-              <figcaption><b>Simulation</b> the humanoid, with the contact model</figcaption>
-            </figure>
-          </div>
-          <div class="pbar">
-            <p class="pcap">Same task, two worlds. The simulated run is a check of the contact model, not a learned policy.</p>
-            <button class="fplay" type="button" aria-label="Pause the videos"><svg viewBox="0 0 18 18" aria-hidden="true"><path class="i-pause" d="M4 2.5h3.4v13H4zM10.6 2.5H14v13h-3.4z" fill="currentColor"/><path class="i-play" d="M5 2.5v13l11-6.5z" fill="currentColor"/></svg></button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- HARDWARE -->
-<section class="sec band" id="hardware">
-  <div class="wrap-copy story-head">
-    <p class="eyebrow rv">Contribution 3 · Hardware design</p>
-    <h2 class="hx rv">Every spine <br>on its own spring.</h2>
-    <p class="lede rv">A spine catches on a tiny bump when it is dragged the right way. Real walls are irregular, so not every spine finds one at once. <b>Each spine rides on its own spring and moves on its own</b>, so more of them end up in contact.<sup class="fn"><a href="#fn1" aria-label="Footnote 1">1</a></sup></p>
-  </div>
-
-  <div class="wrap block explorer" data-tabs>
-    <div class="seg rv" role="tablist" aria-label="Hardware design">
-      <button role="tab" type="button" id="ht-palm" aria-controls="hp-palm" aria-selected="true">Spine palm</button>
-      <button role="tab" type="button" id="ht-hinge" aria-controls="hp-hinge">Hinge placement</button>
-      <button role="tab" type="button" id="ht-walls" aria-controls="hp-walls">Test walls</button>
-      <button role="tab" type="button" id="ht-robot" aria-controls="hp-robot">On the robot</button>
-    </div>
-
-    <div class="tabpanel" role="tabpanel" id="hp-palm" aria-labelledby="ht-palm">
-      <div class="palm-pair">
-        <div class="ph media">
-          <img src="media/palm-tile.jpg" width="1600" height="1200" loading="lazy" alt="One spine unit: a clear block holding a grid of small springs, each with a spine through it.">
-          <span class="tag hw"><i></i>One spine unit</span>
-        </div>
-        <div class="ph media" data-auto>
-          <video data-src="media/spine-assembly.mp4" poster="media/spine-assembly.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="Gloved hands assembling spines for a unit."></video>
-          <span class="tag hw"><i></i>Assembly</span>
-        </div>
-      </div>
-      <div class="jrow wrap-sm palm-cad">
-        <figure style="--ar:.722"><img src="media/palm-cad.jpg" width="900" height="1247" loading="lazy" alt="CAD render of the assembled palm: twelve spine units in three rows of four on a plate above a cylindrical mount."><figcaption>Twelve units, in three rows of four, make one palm.</figcaption></figure>
-        <figure class="full" style="--ar:1.363"><img src="media/palm-exploded.jpg" width="1600" height="1174" loading="lazy" alt="Exploded CAD view of the palm: backing plate, unit rows, frame, mounts and a self-aligning bearing."><figcaption>Exploded view. A self-aligning bearing between palm and limb allows limited rotation instead of a rigid mount.</figcaption></figure>
-        <figure style="--ar:.757"><img src="media/sim-palms.jpg" width="634" height="838" loading="lazy" alt="Simulated humanoid on a wall with green spine palms on both hands and both feet."><figcaption>In simulation, palms on both hands and both feet.</figcaption></figure>
-      </div>
-    </div>
-
-    <div class="tabpanel" role="tabpanel" id="hp-hinge" aria-labelledby="ht-hinge">
-      <div class="narrow">
-        <p class="panel-lede">The palm turns freely on the limb, so the limb passes only a force through the hinge. <b>A hinge above the spine face turns shear into a peeling moment that lifts the top row; an offset along the face does the same with the normal force.</b></p>
-        <div class="rewards">
-          <article class="rcard">
-            <h4>Hinge height, in the model</h4>
-            <p>One palm under 150&nbsp;N of shear and no pull, 20,000 draws of unit strength. Height \(h\) is measured from the spine face.</p>
-            <dl>
-              <dt>\(h=0\)</dt><dd>holds with probability 0.985</dd>
-              <dt>3&nbsp;mm</dt><dd>0.907</dd>
-              <dt>5&nbsp;mm</dt><dd>0.223</dd>
-              <dt>10&nbsp;mm</dt><dd>0</dd>
-            </dl>
-            <p>Each millimetre of height adds about 0.6&nbsp;N of pull on every top-row unit at this shear.</p>
-          </article>
-          <article class="rcard">
-            <h4>A fork palm for the 27-DoF wrist</h4>
-            <p>Two columns of six units clamp the wrist roll axis, with the palm centre level with it. A pin hangs the palm in a U-fork: it tilts ±6° on its stops and slides 2&nbsp;mm along the normal on preloaded springs.</p>
-            <p><b>Designed under hard limits</b> on what can be built: hinge geometry, stop angles and spring rates come from the parts. In fourteen corner load cases the forearm's three 9&nbsp;N·m motors stay within their limits; a rigid flange mount exceeds them.</p>
-            <span class="badge wip" style="margin-top:16px"><span class="wip-dot" aria-hidden="true"></span>Design, in simulation</span>
-          </article>
-        </div>
-      </div>
-    </div>
-
-    <div class="tabpanel" role="tabpanel" id="hp-walls" aria-labelledby="ht-walls">
-      <p class="panel-lede">A rough stucco surface, close to a real outdoor wall, for the spines to grip, and a full-height wall on an aluminum frame.</p>
-      <div class="scroller" data-scroller>
-        <div class="scroller-bar">
-          <span class="count" aria-live="polite"></span>
-          <button class="arw prev" type="button" aria-label="Previous photo"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          <button class="arw next" type="button" aria-label="Next photo"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        </div>
-        <div class="strack photos">
-          <figure><div class="ph media"><img src="media/stucco-1.jpg" width="1200" height="1019" loading="lazy" alt="Metal lath, lumber and tools laid out on the ground."></div><figcaption><span>1</span> Materials: metal lath, lumber, tools.</figcaption></figure>
-          <figure><div class="ph media"><img src="media/stucco-2.jpg" width="1200" height="929" loading="lazy" alt="Metal lath screwed onto a plywood board."></div><figcaption><span>2</span> Metal lath fixed onto a plywood backing.</figcaption></figure>
-          <figure><div class="ph media"><img src="media/stucco-3.jpg" width="1200" height="751" loading="lazy" alt="A bag of stucco mix."></div><figcaption><span>3</span> Stucco mix.</figcaption></figure>
-          <figure><div class="ph media"><img src="media/stucco-4.jpg" width="1200" height="900" loading="lazy" alt="Wet stucco being mixed in a bucket with a trowel."></div><figcaption><span>4</span> Mixed, then applied over the lath.</figcaption></figure>
-          <figure><div class="ph media"><img src="media/stucco-5.jpg" width="1200" height="1318" loading="lazy" alt="The stucco panel after drying, with a rough grey surface."></div><figcaption><span>5</span> Dried overnight under a plastic sheet.</figcaption></figure>
-          <figure><div class="ph media" data-auto><video data-src="media/stucco-spines.mp4" poster="media/stucco-spines.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="A row of spine units dragged across the dried stucco."></video></div><figcaption><span>6</span> Spines on the finished surface.</figcaption></figure>
-          <figure><div class="ph media"><img src="media/wall-1.jpg" width="1200" height="1600" loading="lazy" alt="A tall test wall panel standing in an aluminum-extrusion frame outdoors."></div><figcaption><span>7</span> The full-height wall on its aluminum-extrusion frame.</figcaption></figure>
-          <figure><div class="ph media"><img src="media/wall-2.jpg" width="1600" height="1200" loading="lazy" alt="The wall frame from the side, with a plywood panel and diagonal braces."></div><figcaption><span>8</span> The same wall from the side, with its braces.</figcaption></figure>
-        </div>
-      </div>
-    </div>
-
-    <div class="tabpanel" role="tabpanel" id="hp-robot" aria-labelledby="ht-robot">
-      <p class="panel-lede">Before the first real climb, we brought up the full deployment stack on the humanoid and transferred a first task on the ground. <b>Climbing on hardware has not started yet.</b></p>
-      <div class="scroller" data-scroller>
-        <div class="scroller-bar">
-          <span class="count" aria-live="polite"></span>
-          <button class="arw prev" type="button" aria-label="Previous step"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          <button class="arw next" type="button" aria-label="Next step"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        </div>
-        <div class="strack runs" aria-label="Run procedure">
-          <figure class="run-step"><div class="ph media"><img src="media/run-1.jpg" width="312" height="458" loading="lazy" alt="The robot hanging from the gantry, feet off the ground."></div><h4><span>1</span>Robot on gantry</h4><p>Suspended, feet unloaded.</p></figure>
-          <figure class="run-step"><div class="ph media"><img src="media/run-2.jpg" width="340" height="560" loading="lazy" alt="The robot holding its zero pose on the gantry."></div><h4><span>2</span>Power on, go to ZERO</h4><p>Cubic trajectory from the power-on pose.</p></figure>
-          <figure class="run-step"><div class="ph media"><img src="media/run-3.jpg" width="339" height="425" loading="lazy" alt="The robot standing on the floor with the gantry rope slack."></div><h4><span>3</span>Lower to ground</h4><p>Feet loaded, gantry slack.</p></figure>
-          <figure class="run-step"><div class="ph media"><img src="media/run-4.jpg" width="195" height="260" loading="lazy" alt="An operator holding the gamepad."></div><h4><span>4</span>Unlock, select task</h4><p>Gamepad, LT + RT.</p></figure>
-          <figure class="run-step"><div class="ph media"><img src="media/run-5.jpg" width="388" height="542" loading="lazy" alt="The robot standing on its own while a task runs."></div><h4><span>5</span>Task running</h4><p>Control software below.</p></figure>
-          <figure class="run-step"><div class="ph media"><img src="media/run-1.jpg" width="312" height="458" loading="lazy" alt="The robot hoisted back up on the gantry."></div><h4><span>6</span>Power off</h4><p>Return to ZERO first, then hoist up.</p></figure>
-        </div>
-      </div>
-      <p class="run-note">Going to ZERO interpolates from the power-on pose with zero joint velocity at both ends: \(q(s)=q_{\mathrm{init}}+(q_{\mathrm{ZERO}}-q_{\mathrm{init}})(3s^2-2s^3)\), with \(s=t/T\).</p>
-
-      <article class="stage stack">
-        <p class="stage-k">One control loop, for robot and simulator</p>
-        <ol class="chain">
-          <li><b>Operator</b><ul><li>Gamepad <i>publishes commands</i></li><li>Web panel <i>read-only telemetry; starts and stops processes</i></li></ul></li>
-          <li><b>LCM bus</b><span>UDP multicast between processes.</span></li>
-          <li class="hot"><b>Real-time loop, 500&nbsp;Hz</b><ul><li>Safety guards</li><li>Task scheduling <i>zero, walk, walk_amp, hold</i></li><li>RL policy inference <i>50&nbsp;Hz</i></li><li>Telemetry and logging <i>50&nbsp;Hz</i></li></ul></li>
-          <li><b>Backend</b><ul><li>Real robot <i>fieldbus at 500&nbsp;Hz to motors and sensors</i></li><li>Simulation <i>MuJoCo model</i></li></ul></li>
-        </ol>
-      </article>
-
-      <div class="split squat">
-        <div>
-          <h3 class="sub-head">One squat. Two starts.</h3>
-          <p class="lede" style="margin-top:14px">Started cold, the robot begins outside the states it saw in training. <b>A transition phase gives the policy time to adapt to the mismatch.</b></p>
-          <p class="copy" style="margin-top:14px">Training also randomizes friction independently on each foot.</p>
-        </div>
-        <div class="pair" data-pair>
-          <div class="pair-grid">
-            <figure class="pp">
-              <div class="pv" style="--ar:3/4"><video data-src="media/squat-fail.mp4" poster="media/squat-fail.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="The robot is released on the gantry and collapses to the floor."></video><span class="tag hw"><i></i>Hardware</span></div>
-              <figcaption><b>No transition phase</b> out of distribution from the first step: it falls.</figcaption>
-            </figure>
-            <figure class="pp">
-              <div class="pv" style="--ar:3/4"><video data-src="media/squat-success.mp4" poster="media/squat-success.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="The robot stands on its own, squats down and stands back up."></video><span class="tag hw"><i></i>Hardware</span></div>
-              <figcaption><b>With a transition phase</b> the policy adapts, squats and stands back up.</figcaption>
-            </figure>
-          </div>
-          <div class="pbar">
-            <p class="pcap">The same squat policy, started two ways.</p>
-            <button class="fplay" type="button" aria-label="Pause the videos"><svg viewBox="0 0 18 18" aria-hidden="true"><path class="i-pause" d="M4 2.5h3.4v13H4zM10.6 2.5H14v13h-3.4z" fill="currentColor"/><path class="i-play" d="M5 2.5v13l11-6.5z" fill="currentColor"/></svg></button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TRAINING -->
-<section class="sec" id="training">
-  <div class="wrap-copy story-head">
-    <span class="badge wip rv"><span class="wip-dot" aria-hidden="true"></span>In development</span>
-    <p class="eyebrow rv">Training</p>
+    <p class="eyebrow rv">Policy learning</p>
     <h2 class="hx rv">A teacher per skill. <br>One student to deploy.</h2>
     <p class="lede rv">Each skill is first learned by its own teacher, which tracks a certified reference and sees what only the simulator knows. <b>All teachers are then distilled into one student that acts from proprioception and an operator's skill command.</b><sup class="fn"><a href="#fn2" aria-label="Footnote 2">2</a></sup></p>
   </div>
@@ -633,10 +558,66 @@
       </div>
     </article>
   </div>
+</section>
 
-  <div class="wrap-mid">
+<!-- RESULTS -->
+<section class="sec band" id="results">
+  <div class="wrap-copy story-head">
+    <p class="eyebrow rv">Results</p>
+    <h2 class="hx rv">Policies, <br>task by task.</h2>
+    <p class="lede rv">In the order a mission needs them: get from the ground onto the wall, then climb it. <b>Both run in simulation with the spine model's random latches and failures.</b></p>
+  </div>
+
+  <div class="wrap block">
+    <div class="split rev">
+      <div class="ph media rv" style="aspect-ratio:16/9" data-auto>
+        <video data-src="media/ground-start.mp4" poster="media/ground-start.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="In simulation, the humanoid stands beside an inclined wall, then places its hands and feet on it."></video>
+        <span class="tag sim"><i></i>Simulation · policy · inclined wall</span>
+        <button class="vbtn" type="button" aria-label="Pause the video"><svg viewBox="0 0 18 18" aria-hidden="true"><path class="i-pause" d="M4 2.5h3.4v13H4zM10.6 2.5H14v13h-3.4z" fill="currentColor"/><path class="i-play" d="M5 2.5v13l11-6.5z" fill="currentColor"/></svg></button>
+      </div>
+      <div class="rv">
+        <p class="stage-k">Task 1</p>
+        <h3 class="sub-head" style="margin-top:12px">From the ground onto the wall.</h3>
+        <p class="copy" style="margin-top:14px">Standing on the floor, the policy places its hands and feet on an inclined wall, latching each palm on the way: the move every mission makes between ground and wall.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap-copy block story-head task-head">
+    <p class="stage-k rv">Task 2</p>
+    <h3 class="sub-head rv" style="margin-top:12px">Up a vertical wall.</h3>
+    <p class="lede rv">A teacher tracks a kinematic climbing cycle on a 90° wall. In a 30-second rollout its spine engagement follows the reference schedule closely, <b>and no actuator goes above 72% of its torque limit.</b><sup class="fn"><a href="#fn4" aria-label="Footnote 4">4</a></sup></p>
+  </div>
+  <div class="frame-wrap">
+    <div class="frame rv">
+      <div class="ph media" data-auto>
+        <video data-src="media/hero-policy90.mp4" poster="media/hero-policy90.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="In simulation, the trained teacher policy holds a vertical wall and cycles its limbs through the engage schedule."></video>
+        <span class="tag sim"><i></i>Simulation · teacher policy · 90° wall</span>
+        <button class="vbtn" type="button" aria-label="Pause the video"><svg viewBox="0 0 18 18" aria-hidden="true"><path class="i-pause" d="M4 2.5h3.4v13H4zM10.6 2.5H14v13h-3.4z" fill="currentColor"/><path class="i-play" d="M5 2.5v13l11-6.5z" fill="currentColor"/></svg></button>
+      </div>
+    </div>
+  </div>
+  <div class="wrap stats">
+    <div class="stat rv"><span class="v">0.97</span><p><b>Engage-schedule match</b> between the policy and the reference over the 30-second rollout.</p></div>
+    <div class="stat rv"><span class="v">0.81–0.86</span><p><b>Fraction of time each limb is engaged.</b> The reference asks for 0.82–0.84.</p></div>
+    <div class="stat rv"><span class="v">0.72</span><p><b>Peak torque-to-limit ratio</b>, at the left shoulder pitch. The most-loaded joint keeps a margin throughout.</p></div>
+  </div>
+  <div class="wrap">
     <details class="more rv">
-      <summary><span><b>Two rewards for spines</b>Used by the current wall-climbing teacher</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 7l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+      <summary><span><b>The 30-second traces</b>Spine engagement and torque, limb by limb</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 7l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+      <div class="figs">
+        <figure class="tile">
+          <img src="media/engage-raster.png" width="2080" height="845" loading="lazy" alt="Raster of spine engagement for the four limbs over 30 seconds above the phase-aligned reference engage schedule.">
+          <figcaption class="cap"><b>Spine engagement over 30 s.</b> Top: hold margin of each limb's palm, from 1 (unloaded) to 0 (release boundary); triangles mark forced releases by type. Bottom: the reference engage schedule, phase-aligned.</figcaption>
+        </figure>
+        <figure class="tile">
+          <img src="media/torque-heatmap.png" width="2080" height="1170" loading="lazy" alt="Heatmap of torque over limit for every actuator over 30 seconds, and a line plot of the worst-joint margin.">
+          <figcaption class="cap"><b>Torque over the same 30 s.</b> |torque| / limit for every actuator, peaking at 0.72 at the left shoulder pitch, and the margin of the most-loaded joint, which never reaches zero.</figcaption>
+        </figure>
+      </div>
+    </details>
+    <details class="more">
+      <summary><span><b>Two rewards for spines</b>How this teacher is shaped to engage on time</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 7l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
       <p class="panel-lede">Spines hold only when they engage on time and with enough preload. Two terms shape that.</p>
       <div class="rewards">
         <article class="rcard">
@@ -671,123 +652,79 @@
         </article>
       </div>
     </details>
+    <p class="scope rv"><b>Scope.</b> Every climb on this page is in simulation. Both policies track kinematic references made before the generator above; teachers on generated references and the distilled student are not shown here.</p>
   </div>
 </section>
 
-<!-- SIMULATION RESULTS -->
-<section class="sec band" id="sim">
-  <div class="wrap-copy story-head">
-    <p class="eyebrow rv">Simulation</p>
-    <h2 class="hx rv">A 90° wall, <br>on schedule.</h2>
-    <p class="lede rv">Our first teacher tracks a kinematic climbing cycle on a vertical wall. In a 30-second rollout its spine engagement follows the reference schedule closely, <b>and no actuator goes above 72% of its torque limit.</b><sup class="fn"><a href="#fn4" aria-label="Footnote 4">4</a></sup> Teachers on generated references are next.</p>
-  </div>
-  <div class="frame-wrap">
-    <div class="frame rv">
-      <div class="ph media" data-auto>
-        <video data-src="media/hero-policy90.mp4" poster="media/hero-policy90.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="In simulation, the trained teacher policy holds a vertical wall and cycles its limbs through the engage schedule."></video>
-        <span class="tag sim"><i></i>Simulation · teacher policy · 90° wall</span>
-        <button class="vbtn" type="button" aria-label="Pause the video"><svg viewBox="0 0 18 18" aria-hidden="true"><path class="i-pause" d="M4 2.5h3.4v13H4zM10.6 2.5H14v13h-3.4z" fill="currentColor"/><path class="i-play" d="M5 2.5v13l11-6.5z" fill="currentColor"/></svg></button>
-      </div>
-    </div>
-  </div>
-  <div class="wrap stats">
-    <div class="stat rv"><span class="v">0.97</span><p><b>Engage-schedule match</b> between the policy and the reference over the 30-second rollout.</p></div>
-    <div class="stat rv"><span class="v">0.81–0.86</span><p><b>Fraction of time each limb is engaged.</b> The reference asks for 0.82–0.84.</p></div>
-    <div class="stat rv"><span class="v">0.72</span><p><b>Peak torque-to-limit ratio</b>, at the left shoulder pitch. The most-loaded joint keeps a margin throughout.</p></div>
-  </div>
+<!-- SUPPLEMENTARY -->
+<section class="sec" id="supp">
   <div class="wrap">
-    <details class="more rv">
-      <summary><span><b>The 30-second traces</b>Spine engagement and torque, limb by limb</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 7l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-      <div class="figs">
-        <figure class="tile">
-          <img src="media/engage-raster.png" width="2080" height="845" loading="lazy" alt="Raster of spine engagement for the four limbs over 30 seconds above the phase-aligned reference engage schedule.">
-          <figcaption class="cap"><b>Spine engagement over 30 s.</b> Top: hold margin of each limb's palm, from 1 (unloaded) to 0 (release boundary); triangles mark forced releases by type. Bottom: the reference engage schedule, phase-aligned.</figcaption>
-        </figure>
-        <figure class="tile">
-          <img src="media/torque-heatmap.png" width="2080" height="1170" loading="lazy" alt="Heatmap of torque over limit for every actuator over 30 seconds, and a line plot of the worst-joint margin.">
-          <figcaption class="cap"><b>Torque over the same 30 s.</b> |torque| / limit for every actuator, peaking at 0.72 at the left shoulder pitch, and the margin of the most-loaded joint, which never reaches zero.</figcaption>
-        </figure>
+    <p class="eyebrow rv">Supplementary</p>
+    <h2 class="hl-head rv">On the real robot and the test walls.</h2>
+    <details class="more" id="supp-robot">
+      <summary><span><b>Bringing up the real robot</b>The deployment stack, and a first sim-to-real test on the ground</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 7l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+      <div class="scroller" data-scroller>
+        <div class="scroller-bar">
+          <span class="count" aria-live="polite"></span>
+          <button class="arw prev" type="button" aria-label="Previous step"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button class="arw next" type="button" aria-label="Next step"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+        <div class="strack runs" aria-label="Run procedure">
+          <figure class="run-step"><div class="ph media"><img src="media/run-1.jpg" width="312" height="458" loading="lazy" alt="The robot hanging from the gantry, feet off the ground."></div><h4><span>1</span>Robot on gantry</h4><p>Suspended, feet unloaded.</p></figure>
+          <figure class="run-step"><div class="ph media"><img src="media/run-2.jpg" width="340" height="560" loading="lazy" alt="The robot holding its zero pose on the gantry."></div><h4><span>2</span>Power on, go to ZERO</h4><p>Cubic trajectory from the power-on pose.</p></figure>
+          <figure class="run-step"><div class="ph media"><img src="media/run-3.jpg" width="339" height="425" loading="lazy" alt="The robot standing on the floor with the gantry rope slack."></div><h4><span>3</span>Lower to ground</h4><p>Feet loaded, gantry slack.</p></figure>
+          <figure class="run-step"><div class="ph media"><img src="media/run-4.jpg" width="195" height="260" loading="lazy" alt="An operator holding the gamepad."></div><h4><span>4</span>Unlock, select task</h4><p>Gamepad, LT + RT.</p></figure>
+          <figure class="run-step"><div class="ph media"><img src="media/run-5.jpg" width="388" height="542" loading="lazy" alt="The robot standing on its own while a task runs."></div><h4><span>5</span>Task running</h4><p>The control loop below.</p></figure>
+          <figure class="run-step"><div class="ph media"><img src="media/run-1.jpg" width="312" height="458" loading="lazy" alt="The robot hoisted back up on the gantry."></div><h4><span>6</span>Power off</h4><p>Return to ZERO first, then hoist up.</p></figure>
+        </div>
+      </div>
+      <p class="run-note">Going to ZERO interpolates from the power-on pose with zero joint velocity at both ends: \(q(s)=q_{\mathrm{init}}+(q_{\mathrm{ZERO}}-q_{\mathrm{init}})(3s^2-2s^3)\), with \(s=t/T\).</p>
+      <article class="stage stack">
+        <p class="stage-k">One control loop, for robot and simulator</p>
+        <ol class="chain">
+          <li><b>Operator</b><ul><li>Gamepad <i>publishes commands</i></li><li>Web panel <i>read-only telemetry; starts and stops processes</i></li></ul></li>
+          <li><b>LCM bus</b><span>UDP multicast between processes.</span></li>
+          <li class="hot"><b>Real-time loop, 500&nbsp;Hz</b><ul><li>Safety guards</li><li>Task scheduling <i>zero, walk, walk_amp, hold</i></li><li>RL policy inference <i>50&nbsp;Hz</i></li><li>Telemetry and logging <i>50&nbsp;Hz</i></li></ul></li>
+          <li><b>Backend</b><ul><li>Real robot <i>fieldbus at 500&nbsp;Hz to motors and sensors</i></li><li>Simulation <i>MuJoCo model</i></li></ul></li>
+        </ol>
+      </article>
+      <div class="pair squat-pair" data-pair>
+        <div class="pair-grid">
+          <figure class="pp">
+            <div class="pv" style="--ar:3/4"><video data-src="media/squat-fail.mp4" poster="media/squat-fail.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="The robot is released on the gantry and collapses to the floor."></video><span class="tag hw"><i></i>Hardware</span></div>
+            <figcaption><b>Started cold</b> out of distribution from the first step: it falls.</figcaption>
+          </figure>
+          <figure class="pp">
+            <div class="pv" style="--ar:3/4"><video data-src="media/squat-success.mp4" poster="media/squat-success.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="The robot stands on its own, squats down and stands back up."></video><span class="tag hw"><i></i>Hardware</span></div>
+            <figcaption><b>With a transition phase</b> the policy adapts, squats and stands back up.</figcaption>
+          </figure>
+        </div>
+        <div class="pbar">
+          <p class="pcap">One squat policy, started two ways. Training also randomizes friction independently on each foot.</p>
+          <button class="fplay" type="button" aria-label="Pause the videos"><svg viewBox="0 0 18 18" aria-hidden="true"><path class="i-pause" d="M4 2.5h3.4v13H4zM10.6 2.5H14v13h-3.4z" fill="currentColor"/><path class="i-play" d="M5 2.5v13l11-6.5z" fill="currentColor"/></svg></button>
+        </div>
       </div>
     </details>
-  </div>
-  <div class="wrap block">
-    <div class="split rev">
-      <div class="ph media rv" style="aspect-ratio:16/9" data-auto>
-        <video data-src="media/ground-start.mp4" poster="media/ground-start.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="In simulation, the humanoid stands beside an inclined wall, then places its hands and feet on it."></video>
-        <span class="tag wip"><i></i>Simulation · early</span>
-        <button class="vbtn" type="button" aria-label="Pause the video"><svg viewBox="0 0 18 18" aria-hidden="true"><path class="i-pause" d="M4 2.5h3.4v13H4zM10.6 2.5H14v13h-3.4z" fill="currentColor"/><path class="i-play" d="M5 2.5v13l11-6.5z" fill="currentColor"/></svg></button>
+    <details class="more" id="supp-walls">
+      <summary><span><b>Test walls</b>A stucco panel and a full-height wall frame, built for the first real climbs</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 7l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+      <div class="scroller" data-scroller>
+        <div class="scroller-bar">
+          <span class="count" aria-live="polite"></span>
+          <button class="arw prev" type="button" aria-label="Previous photo"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button class="arw next" type="button" aria-label="Next photo"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+        <div class="strack photos">
+          <figure><div class="ph media"><img src="media/stucco-1.jpg" width="1200" height="1019" loading="lazy" alt="Metal lath, lumber and tools laid out on the ground."></div><figcaption><span>1</span> Materials: metal lath, lumber, tools.</figcaption></figure>
+          <figure><div class="ph media"><img src="media/stucco-2.jpg" width="1200" height="929" loading="lazy" alt="Metal lath screwed onto a plywood board."></div><figcaption><span>2</span> Metal lath fixed onto a plywood backing.</figcaption></figure>
+          <figure><div class="ph media"><img src="media/stucco-3.jpg" width="1200" height="751" loading="lazy" alt="A bag of stucco mix."></div><figcaption><span>3</span> Stucco mix.</figcaption></figure>
+          <figure><div class="ph media"><img src="media/stucco-4.jpg" width="1200" height="900" loading="lazy" alt="Wet stucco being mixed in a bucket with a trowel."></div><figcaption><span>4</span> Mixed, then applied over the lath.</figcaption></figure>
+          <figure><div class="ph media"><img src="media/stucco-5.jpg" width="1200" height="1318" loading="lazy" alt="The stucco panel after drying, with a rough grey surface."></div><figcaption><span>5</span> Dried overnight under a plastic sheet.</figcaption></figure>
+          <figure><div class="ph media" data-auto><video data-src="media/stucco-spines.mp4" poster="media/stucco-spines.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="A row of spine units dragged across the dried stucco."></video></div><figcaption><span>6</span> Spines on the finished surface.</figcaption></figure>
+          <figure><div class="ph media"><img src="media/wall-1.jpg" width="1200" height="1600" loading="lazy" alt="A tall test wall panel standing in an aluminum-extrusion frame outdoors."></div><figcaption><span>7</span> The full-height wall on its aluminum-extrusion frame.</figcaption></figure>
+          <figure><div class="ph media"><img src="media/wall-2.jpg" width="1600" height="1200" loading="lazy" alt="The wall frame from the side, with a plywood panel and diagonal braces."></div><figcaption><span>8</span> The same wall from the side, with its braces.</figcaption></figure>
+        </div>
       </div>
-      <div class="rv">
-        <span class="badge wip"><span class="wip-dot" aria-hidden="true"></span>In progress</span>
-        <h3 class="sub-head" style="margin-top:14px">Next in simulation: start from the ground.</h3>
-        <p class="copy" style="margin-top:14px">An early policy goes from standing on the floor to hands and feet on an inclined wall, the first step toward missions that move between ground and wall.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- STATUS -->
-<section class="sec" id="status">
-  <div class="wrap-copy story-head">
-    <p class="eyebrow rv">Status</p>
-    <h2 class="hx rv">Where we are.</h2>
-    <p class="lede rv">This is an ongoing project. Here is what works today, what we are building now, and what comes next. <b>The page will be updated as results come in.</b></p>
-  </div>
-  <div class="wrap board">
-    <section class="col done rv" aria-label="Done">
-      <h3><span class="ic" aria-hidden="true"><svg viewBox="0 0 14 14" width="14" height="14"><path d="M3 7.4l2.6 2.6L11 4.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Done</h3>
-      <ul>
-        <li>Single-unit limit surface measured<span>100 trials on the bench.</span></li>
-        <li>Probabilistic palm contact model<span>In the training simulator; checked on a flipping task.</span></li>
-        <li>Reference generator and certificate<span>Block flip and an exterior-corner climbing cycle generated.</span></li>
-        <li>Spine palm designed and built<span>12 units per palm, a spring on every spine.</span></li>
-        <li>Teacher policy on a 90° wall<span>In simulation, on a kinematic reference.</span></li>
-        <li>Deployment stack on the real humanoid<span>A first ground task, a squat, transferred.</span></li>
-        <li>Stucco and wood test walls built</li>
-      </ul>
-    </section>
-    <section class="col wip rv" aria-label="In progress">
-      <h3><span class="ic" aria-hidden="true"><span class="wip-dot"></span></span>In progress</h3>
-      <ul>
-        <li>Closing the last certificate check<span>Half-step convergence (T8) on both generated tasks.</span></li>
-        <li>References for every skill<span>Flat wall, onto and off the wall, climbing down.</span></li>
-        <li>Skill teachers on generated references<span>Then one student, PPO with DAgger.</span></li>
-        <li>Fork palm for the 27-DoF wrist<span>Designed in simulation.</span></li>
-      </ul>
-    </section>
-    <section class="col next rv" aria-label="Next">
-      <h3><span class="ic" aria-hidden="true"><svg viewBox="0 0 14 14" width="14" height="14"><path d="M5 3l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Next</h3>
-      <ul>
-        <li>Spine palms on the robot's hands and feet</li>
-        <li>First climbs on the real test walls</li>
-        <li>Ground–wall–work missions<span>Walk up, climb, and do the job.</span></li>
-      </ul>
-    </section>
-  </div>
-  <p class="updated rv">Last updated October 30, 2026.</p>
-</section>
-
-<!-- FAQ -->
-<section class="sec" id="faq" style="padding-top:0">
-  <div class="wrap">
-    <h2 class="hl-head rv">Questions? Answers.</h2>
-    <div class="faq-top"><button class="faq-all" id="faqAll" type="button" aria-expanded="false">Expand all <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 3.5L5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
-    <div class="faq" id="faqList">
-      <details><summary>Has the robot climbed a real wall yet?<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 7l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-        <div class="ans"><p><b>Not yet.</b> All climbing so far is in simulation. On hardware we have measured single spine units, brought up the full deployment stack, transferred a first ground task, and built stucco and wood test walls.</p><p>Climbing the real walls is the next milestone. This page will be updated when it happens.</p></div></details>
-      <details><summary>Why not just retarget human climbing motion?<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 7l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-        <div class="ans"><p>A human hand and a spine palm hold in different ways. <b>A spine palm needs preload before it latches, holds only while every unit stays inside its limits, and has to be unloaded before it is pulled off.</b> A kinematic motion says nothing about any of that, so a teacher tracking it learns to fight its own contacts.</p><p>The generator plans the forces with the motion, and lets the contact model decide when each latch and release happens.</p></div></details>
-      <details><summary>Why micro-spines?<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 7l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-        <div class="ans"><p>They grip <b>rough, unprepared surfaces</b> such as concrete and stucco, the kind found on real structures. Each spine hooks a small asperity when it is dragged in the right direction, so the wall needs no preparation.</p></div></details>
-      <details><summary>Why a humanoid, and not a specialized climber?<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 7l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-        <div class="ans"><p>We do not claim that a humanoid beats a specialized climber on a uniform wall. <b>Its advantage is in mixed missions</b> that combine walking, climbing and working with its hands, in one body.</p><p>A general-purpose humanoid is also a good starting point for co-design: it shows what a task really needs from a body, what to remove and what to add.</p></div></details>
-      <details><summary>Does the robot need force sensing?<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 7l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-        <div class="ans"><p>The deploy policy does not. <b>Only the teachers' critics see latch states, unit strengths and contact forces.</b> The student infers whether a palm is latched from its proprioceptive history.</p></div></details>
-      <details><summary>How is spine contact simulated?<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 7l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-        <div class="ans"><p>Each palm is twelve units that fail independently. Given the palm's wrench, the load is split among the units that still hold; when some fail, the rest share it again, round by round.</p><p>In the simulator each latch draws its units' strengths once, and <b>one GPU thread follows each palm through every failure round</b>. The generator and the certificate use the same rules.</p></div></details>
-      <details><summary>What does a certificate guarantee?<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 7l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-        <div class="ans"><p>That the stored trajectory obeys the robot's dynamics, its limits and the contact model's event rules, checked by code independent of the generator. <b>It says nothing about control:</b> whether a policy can track the reference is what the teachers find out.</p></div></details>
-    </div>
+    </details>
   </div>
 </section>
 
@@ -797,8 +734,8 @@
     <ol>
       <li id="fn1">The palm builds on linearly constrained compliant spines: S. Wang, H. Jiang and M. R. Cutkosky, “Design and modeling of linearly-constrained compliant spines for human-scale locomotion on rocky surfaces,” <i>The International Journal of Robotics Research</i>, 36(9):985–999, 2017. <a href="https://doi.org/10.1177/0278364917720019">doi:10.1177/0278364917720019</a></li>
       <li id="fn2">The teacher–student structure, with one tracking expert per skill distilled by PPO and DAgger, follows “Perceptive Humanoid Parkour,” arXiv:2602.15827, 2026.</li>
-      <li id="fn3">From the latest generated block flip and corner cycle, with 65,536 realizations each. These are preliminary numbers from an ongoing project.</li>
-      <li id="fn4">From one 30-second rollout of the teacher policy on a 90° wall in simulation. These are preliminary numbers from an ongoing project.</li>
+      <li id="fn3">From the latest generated block flip and corner cycle, with 65,536 realizations each.</li>
+      <li id="fn4">From one 30-second rollout of the teacher policy on a 90° wall in simulation.</li>
     </ol>
   </div>
 </section>
@@ -826,7 +763,7 @@
       <span class="btn off" aria-disabled="true">Paper · coming soon</span>
       <a class="btn" href="mailto:sxuan@stanford.edu">Contact</a>
     </div>
-    <div class="cite-note rv"><b>Citation</b>A BibTeX entry will appear here with the paper. Until then, please get in touch before citing these preliminary results.</div>
+    <div class="cite-note rv"><b>Citation</b>A BibTeX entry will appear here with the paper. Until then, please get in touch before citing these results.</div>
   </div>
 </section>
 
@@ -834,7 +771,7 @@
 
 <footer>
   <div class="wrap">
-    <span>Humanoid Wall Climbing · Stanford University · Ongoing project, last updated October 30, 2026</span>
+    <span>Humanoid Wall Climbing · Stanford University</span>
     <span><a href="../">Shixuan (Alan) Zhao</a> · Page design inspired by <a href="https://supermimic.github.io/">SuperMimic</a></span>
   </div>
 </footer>

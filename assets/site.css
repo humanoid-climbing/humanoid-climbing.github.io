@@ -2,8 +2,7 @@
 :root{
   --page:#ffffff; --band:#f5f5f7; --fill:#e8e8ed; --hair:#d2d2d7;
   --ink:#1d1d1f; --ink2:#6e6e73; --blue:#0071e3;
-  /* status colours: the project is ongoing */
-  --wip:#9a5200; --wip-bg:#fff3dc; --wip-dot:#f59e0b;
+  /* media tag colours */
   --done:#1a7f37; --done-bg:#e8f5ec;
   --display:"Inter Tight","Inter","Helvetica Neue",Arial,sans-serif;
   --text:"Inter","Helvetica Neue",Arial,sans-serif;
@@ -29,7 +28,6 @@ figure{margin:0}
 .skip{position:absolute;left:-9999px;top:8px;z-index:100;background:var(--ink);color:#fff;padding:10px 16px;border-radius:12px}
 .skip:focus{left:8px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.nw{white-space:nowrap}
 
 /* ---------- layout ---------- */
 .wrap{width:min(var(--wide), calc(100% - 2 * var(--gut)));margin-inline:auto}
@@ -63,23 +61,11 @@ sup.fn a{color:inherit;text-decoration:underline;text-underline-offset:2px}
   .hl-head{font-size:56px;line-height:1.07}
 }
 
-/* ---------- ongoing status: dot, nav chip, hero notice, media tags, badges ---------- */
-.wip-dot{position:relative;display:inline-block;flex:none;width:8px;height:8px;border-radius:50%;background:var(--wip-dot)}
-.wip-dot::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--wip-dot);opacity:0;animation:wip-pulse 2.2s var(--ease) infinite}
-@keyframes wip-pulse{0%{transform:scale(.55);opacity:.75}100%{transform:scale(1.5);opacity:0}}
-.chip-wip{display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 12px 0 11px;border-radius:999px;background:var(--wip-bg);color:var(--wip);font:500 12px/1 var(--text);letter-spacing:0;white-space:nowrap}
-.chip-wip:hover{text-decoration:none;background:#ffe9bf}
-.notice{display:inline-flex;align-items:center;flex-wrap:wrap;justify-content:center;gap:4px 10px;margin:0 0 22px;padding:8px 16px;border-radius:999px;background:var(--wip-bg);color:var(--wip);font:400 14px/1.35 var(--text);letter-spacing:-.005em}
-.notice b{font-weight:600}
-.notice .sep{color:#d9a35a}
+/* ---------- media tags ---------- */
 .tag{position:absolute;left:14px;top:14px;z-index:2;display:inline-flex;align-items:center;gap:7px;height:26px;padding:0 11px 0 10px;border-radius:999px;background:rgba(255,255,255,.84);-webkit-backdrop-filter:saturate(180%) blur(14px);backdrop-filter:saturate(180%) blur(14px);font:500 12px/1 var(--text);letter-spacing:0;color:var(--ink);white-space:nowrap;pointer-events:none}
 .tag i{width:7px;height:7px;border-radius:50%;background:var(--ink2)}
 .tag.sim i{background:var(--blue)}
 .tag.hw i{background:var(--done)}
-.tag.wip i{background:var(--wip-dot)}
-.badge{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:999px;font:500 12px/1 var(--text);letter-spacing:0;vertical-align:middle;white-space:nowrap}
-.badge.wip{background:var(--wip-bg);color:var(--wip)}
-.badge.done{background:var(--done-bg);color:var(--done)}
 
 /* ---------- media boxes ---------- */
 .ph{position:relative;border-radius:28px;background:var(--band);overflow:hidden}
@@ -99,7 +85,7 @@ sup.fn a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 .nav-title{font:600 19px/1 var(--display);letter-spacing:-.01em;color:var(--ink);white-space:nowrap}
 .nav-title:hover{text-decoration:none}
 .nav-title .t-short{display:none}
-.nav .chip-wip{margin-left:4px;margin-right:auto}
+.nav .explore{margin-left:auto}
 .pill{position:relative;display:inline-flex;align-items:center;justify-content:center;height:30px;padding:0 13px;border-radius:999px;font:400 12px/1 var(--text);letter-spacing:0;white-space:nowrap;border:1px solid transparent;background:none}
 .pill::after{content:"";position:absolute;inset:-7px -3px}
 .pill.out{border-color:var(--ink2);color:var(--ink)}
@@ -124,24 +110,13 @@ sup.fn a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 .hero .eyebrow{font-size:21px}
 .hero-sub{margin:20px auto 0;max-width:38em;font:400 17px/1.47 var(--text);color:var(--ink)}
 .hero-stage{position:relative;margin-top:44px;padding-bottom:44px}
-.hero-stage .ph{aspect-ratio:1/1;background:#2a4867;container-type:inline-size}
-/* the button sits above the status pill, or beside it once the stage is wide enough (pill 600 px + 2 x (16 px + 44 px)) */
-.hero-stage .vbtn{bottom:60px}
-@container (min-width:740px){.hero-stage .vbtn{bottom:16px}}
-.buy{position:relative;z-index:3;margin:-36px auto 0;width:min(600px, calc(100% - 16px));display:flex;align-items:center;gap:14px;padding:12px 12px 12px 22px;border-radius:30px;background:rgba(232,232,237,.86);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);text-align:left}
-.buy .wip-dot{margin-top:2px}
-.buy p{margin:0;font:600 14px/1.43 var(--text);letter-spacing:-.01em;color:var(--ink)}
-.buy p>span{display:block;font-weight:400;color:var(--ink2)}
-.buy .cta{margin-left:auto;flex:none;display:inline-flex;align-items:center;justify-content:center;height:44px;padding:0 22px;border-radius:999px;background:var(--blue);color:#fff;font:400 17px/1 var(--text)}
-.buy .cta:hover{background:#0077ed;text-decoration:none}
+.hero-stage .ph{aspect-ratio:1/1;background:#2a4867}
 @media (min-width:735px){
   .hero{padding-top:104px}
   .hero .eyebrow{font-size:24px}
   .hero-sub{font-size:21px;margin-top:24px}
   .hero-stage{margin-top:32px}
   .hero-stage .ph{aspect-ratio:2/1;width:min(100%, max(600px, calc((100svh - 520px) * 2)));margin-inline:auto}
-  .buy{margin-top:-44px}
-  .buy p{font-size:15px}
 }
 
 /* ---------- section heads with a link on the right ---------- */
@@ -176,7 +151,6 @@ sup.fn a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 /* ---------- story sections ---------- */
 .story-head{text-align:center}
 .story-head .lede{margin-top:32px}
-.story-head .badge{margin-bottom:18px}
 @media (min-width:735px){.story-head .lede{margin-top:40px}}
 .block{margin-top:72px}
 .block-head{margin-bottom:28px}
@@ -233,26 +207,22 @@ sup.fn a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 }
 
 /* ---------- spine palm ---------- */
-.palm-top{margin-top:64px}
 .palm-pair{display:grid;gap:16px}
 .palm-pair>.ph{aspect-ratio:4/3}
 .palm-pair>.ph+.ph{aspect-ratio:1/1}
-@media (min-width:735px){.palm-top{margin-top:88px}.palm-pair{grid-template-columns:2.1fr 1fr;gap:20px}.palm-pair>.ph+.ph{aspect-ratio:auto}}
+@media (min-width:735px){.palm-pair{grid-template-columns:2.1fr 1fr;gap:20px}.palm-pair>.ph+.ph{aspect-ratio:auto}}
 .palm-cad{margin-top:20px}
 
 /* ---------- contact model: steps with equations ---------- */
 .model{margin-top:72px;border-radius:28px;background:var(--band);padding:36px 20px 28px}
 .model-head{text-align:center;margin-bottom:28px}
 .model-head .lede{margin-top:12px;font-size:17px}
-.steps-grid{display:grid;gap:12px;counter-reset:st}
 .step{position:relative;background:var(--page);border-radius:20px;padding:22px 20px 18px;min-width:0}
 .step h4{margin:0 0 4px;font:600 17px/1.3 var(--display);letter-spacing:-.01em}
 .step h4::before{counter-increment:st;content:counter(st);display:inline-grid;place-items:center;width:24px;height:24px;margin-right:10px;border-radius:50%;background:var(--ink);color:#fff;font:600 13px/1 var(--text);vertical-align:1px}
 .step p{margin:8px 0 0;font-size:14px;line-height:1.47;color:var(--ink2)}
 .step .eq{margin:10px 0 0;color:var(--ink)}
-.model-foot{margin:22px 4px 0;font-size:14px;line-height:1.47;color:var(--ink2);text-align:center}
-@media (min-width:735px){.model{padding:64px 56px 48px;margin-top:100px}.model-head{margin-bottom:40px}.model-head .lede{font-size:19px}.steps-grid{gap:16px}.step{padding:26px 28px 22px}.step p{font-size:15px}}
-@media (min-width:1069px){.steps-grid{grid-template-columns:1fr 1fr}}
+@media (min-width:735px){.model{padding:64px 56px 48px;margin-top:100px}.model-head{margin-bottom:40px}.model-head .lede{font-size:19px}.step{padding:26px 28px 22px}.step p{font-size:15px}}
 /* KaTeX: long display maths scroll inside their card instead of widening the page */
 .katex-display{margin:.4em 0;overflow-x:auto;overflow-y:hidden;padding:2px 0}
 .katex{font-size:1.06em}
@@ -260,8 +230,6 @@ sup.fn a{color:inherit;text-decoration:underline;text-underline-offset:2px}
   .katex-display>.katex{font-size:.92em}
   .model{padding-inline:12px}
   .step{padding-inline:16px}
-  .notice .n-more{display:none}
-  .notice{font-size:13px;padding:7px 14px}
 }
 @media (max-width:380px){.katex-display>.katex{font-size:.82em}.rcard{padding-inline:14px}}
 
@@ -279,10 +247,6 @@ sup.fn a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 .fplay{flex:none;width:44px;height:44px;padding:0;border:0;border-radius:50%;background:var(--fill);color:var(--ink);display:grid;place-items:center}
 .fplay:hover{background:var(--hair)}
 @media (max-width:734px){.pair-grid.stack-sm{grid-template-columns:1fr}}
-/* squat: copy beside a pair of portrait clips */
-.squat{align-items:center}
-.squat .pair{margin-top:0}
-@media (min-width:900px){.squat{grid-template-columns:1fr 1.15fr}}
 @media (min-width:735px){.pair-grid{gap:20px}.pp figcaption{font-size:17px;margin-top:16px}.pcap{font-size:17px}}
 
 /* ---------- flow diagrams: nodes joined by arrows; vertical on phones ---------- */
@@ -377,7 +341,6 @@ html:not(.js) .tabpanel+.tabpanel{margin-top:56px}
 .panel-lede b{color:var(--ink);font-weight:400}
 .tab-next{display:flex;align-items:center;gap:6px;min-height:44px;margin:28px auto 0;padding:0 4px;border:0;background:none;color:var(--blue);font-size:17px}
 .tab-next:hover{text-decoration:underline}
-.tabpanel .squat{margin-top:64px}
 @media (min-width:735px){.seg{margin-bottom:44px}.seg [role=tab]{height:40px;padding:0 20px;font-size:15px}.panel-lede{font-size:19px;margin-bottom:36px}}
 
 /* the pipeline figure: each block is a button over the image; phones scroll it sideways */
@@ -415,55 +378,46 @@ html:not(.js) .scroller-bar{display:none}
 .model.in-panel{margin-top:0}
 .band .model{background:var(--page)}
 .band .model .step{background:var(--band)}
-.look-in .ph{aspect-ratio:16/9;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.05)}
-.look-in .ph video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff}
 
 /* closed by default: detail a reader can open */
-.more{margin-top:40px;padding:0 20px;border-radius:28px;background:var(--band)}
-.band .more{background:var(--page)}
-.more>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:44px;padding:22px 4px;cursor:pointer}
-.more>summary::-webkit-details-marker{display:none}
-.more>summary>span{display:flex;flex-direction:column;gap:4px;font-size:15px;line-height:1.4;color:var(--ink2)}
-.more>summary b{font:600 21px/1.2 var(--display);letter-spacing:-.01em;color:var(--ink)}
-.more>summary svg{flex:none;width:20px;height:20px;color:var(--ink2);transition:transform .35s var(--ease)}
-.more[open]>summary svg{transform:rotate(180deg)}
-.more[open]{padding-bottom:20px}
-.more .rcard{background:var(--page)}
-.band .more .rcard,.band .more .tile{background:var(--band)}
-.more .figs{margin-top:0}
-@media (min-width:735px){.more{padding:0 32px}.more>summary{padding:28px 4px}.more>summary b{font-size:24px}.more[open]{padding-bottom:32px}}
+details.more{margin-top:40px;padding:0 20px;border-radius:28px;background:var(--band)}
+.band details.more{background:var(--page)}
+details.more>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:44px;padding:22px 4px;cursor:pointer}
+details.more>summary::-webkit-details-marker{display:none}
+details.more>summary>span{display:flex;flex-direction:column;gap:4px;font-size:15px;line-height:1.4;color:var(--ink2)}
+details.more>summary b{font:600 21px/1.2 var(--display);letter-spacing:-.01em;color:var(--ink)}
+details.more>summary svg{flex:none;width:20px;height:20px;color:var(--ink2);transition:transform .35s var(--ease)}
+details.more[open]>summary svg{transform:rotate(180deg)}
+details.more[open]{padding-bottom:20px}
+details.more .rcard{background:var(--page)}
+.band details.more .rcard,.band details.more .tile{background:var(--band)}
+details.more .figs{margin-top:0}
+details.more .stage{background:var(--page)}
+details.more .stage .chain>li{background:var(--band);box-shadow:none}
+details.more .stage .chain>li.hot{box-shadow:0 0 0 2px var(--blue)}
+@media (min-width:735px){details.more{padding:0 32px}details.more>summary{padding:28px 4px}details.more>summary b{font-size:24px}details.more[open]{padding-bottom:32px}}
 
-/* ---------- status board ---------- */
-.board{display:grid;gap:16px;margin-top:56px}
-.col{border-radius:28px;background:var(--page);padding:26px 22px 18px}
-.col h3{display:flex;align-items:center;gap:10px;margin:0 0 6px;font:600 21px/1.2 var(--display);letter-spacing:-.01em}
-.col h3 .ic{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;flex:none}
-.col.done .ic{background:var(--done-bg);color:var(--done)}
-.col.wip .ic{background:var(--wip-bg)}
-.col.next .ic{background:var(--fill);color:var(--ink2)}
-.col ul{list-style:none;margin:0;padding:0}
-.col li{padding:13px 0;border-top:1px solid var(--hair);font-size:15px;line-height:1.45;color:var(--ink)}
-.col li:first-child{border-top:0}
-.col li>span{display:block;margin-top:2px;font-size:13px;color:var(--ink2)}
-.col li a{white-space:nowrap}
-.sec:not(.band) .col{background:var(--band)}
-@media (min-width:900px){.board{grid-template-columns:repeat(3,1fr);gap:20px;margin-top:80px}.col{padding:32px 30px 22px}.col li{font-size:16px}}
-.updated{margin:28px 0 0;text-align:center;font-size:14px;color:var(--ink2)}
+/* the palm-model animation: plays inline on a white plate, with chapter jumps below */
+.anim{position:relative;aspect-ratio:16/9;border-radius:28px;overflow:hidden;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.05)}
+.anim video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff}
+.chapters{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:20px}
+.chapters button{height:36px;padding:0 16px;border:0;border-radius:999px;background:var(--fill);color:var(--ink2);font:500 14px/1 var(--text);letter-spacing:0;transition:background .25s var(--ease),color .25s var(--ease)}
+.chapters button:hover{color:var(--ink)}
+.chapters button[aria-pressed=true]{background:var(--ink);color:#fff}
+#closer .cap{text-align:center;max-width:52em;margin-inline:auto}
+.anim-scroll{overflow-x:auto;overscroll-behavior-x:contain;border-radius:28px}
+@media (max-width:734px){.anim-scroll{border-radius:18px}.anim{min-width:680px;border-radius:18px}.anim-hint{margin:12px 0 0}.chapters button{height:34px;padding:0 13px;font-size:13px}}
 
-/* ---------- FAQ ---------- */
-.faq-top{display:flex;justify-content:flex-end;margin-top:28px}
-.faq-all{border:0;background:none;color:var(--blue);font-size:15px;min-height:44px;display:inline-flex;align-items:center;gap:6px;padding:0}
-.faq-all svg{width:10px;height:10px;transition:transform .3s var(--ease)}
-.faq-all[aria-expanded=true] svg{transform:rotate(180deg)}
-.faq details{border-bottom:1px solid var(--hair)}
-.faq summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:44px;padding:22px 0;cursor:pointer;font:600 19px/1.26 var(--display);letter-spacing:-.012em}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary svg{flex:none;width:20px;height:20px;color:var(--ink2);transition:transform .35s var(--ease)}
-.faq details[open] summary svg{transform:rotate(180deg)}
-.faq .ans{padding:0 0 28px;font-size:17px;line-height:1.47;color:var(--ink2);max-width:70ch}
-.faq .ans p{margin:0 0 12px}
-.faq .ans b{color:var(--ink);font-weight:400}
-@media (min-width:735px){.faq summary{font-size:28px;line-height:1.14;padding:30px 0}.faq .ans{font-size:19px;padding-right:48px}}
+/* results: a task label over each task's heading; the closing scope note */
+.task-head .lede{margin-top:16px}
+.scope{margin:40px auto 0;max-width:46em;text-align:center;font-size:15px;line-height:1.5;color:var(--ink2)}
+.scope b{color:var(--ink);font-weight:600}
+
+/* supplementary: collapsed blocks at the end of the page */
+#supp .hl-head{margin-bottom:8px}
+#supp details.more .stack{margin-top:24px}
+#supp .run-note{margin-bottom:0}
+.squat-pair{max-width:640px;margin:32px auto 0}
 
 /* ---------- notes, team, footer ---------- */
 .notes{padding-block:48px 40px;font-size:12px;line-height:1.5;color:var(--ink2)}
@@ -495,7 +449,6 @@ footer a{color:var(--ink2);text-decoration:underline;text-underline-offset:2px}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .js .rv{opacity:1;transform:none;transition:none}
-  .wip-dot::after{animation:none}
-  .dot,.dot i,.faq summary svg,.faq-all svg,.qtile,.more>summary svg,.hot-area,.seg [role=tab]{transition:none}
+  .dot,.dot i,.qtile,details.more>summary svg,.hot-area,.seg [role=tab],.chapters button{transition:none}
   .js .tabpanel.on{animation:none}
 }
