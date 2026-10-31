@@ -36,7 +36,7 @@
 
 <nav class="nav" aria-label="Humanoid Wall Climbing">
   <a class="nav-title" href="#top"><span class="t-full">Humanoid Wall Climbing</span><span class="t-short">Wall Climbing</span></a>
-  <a class="chip-wip" href="#scope" title="This is an ongoing project. See what the results cover."><span class="wip-dot" aria-hidden="true"></span>Ongoing</a>
+  <a class="chip-wip" href="#status-key" title="This is an ongoing project. See what is not finished yet."><span class="wip-dot" aria-hidden="true"></span>Ongoing</a>
   <div class="explore">
     <button class="pill out" id="exploreBtn" type="button" aria-expanded="false" aria-controls="exploreMenu">Explore</button>
     <div class="explore-menu" id="exploreMenu" hidden>
@@ -48,6 +48,7 @@
       <a href="#results">Results</a>
       <a href="#walls">Test walls</a>
       <a href="#supp">Supplementary</a>
+      <a href="#status-key">Status key</a>
       <a href="#team">Citation</a>
     </div>
   </div>
@@ -67,7 +68,7 @@
   <div class="wrap-mid hero-stage">
     <div class="ph media rv" data-auto>
       <video data-src="media/hero-policy90.mp4" poster="media/hero-policy90.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="In simulation, a humanoid with spine palms on its hands and feet holds a vertical wall and steps its limbs through a climbing cycle."></video>
-      <span class="tag sim"><i></i>Simulation · teacher policy · 90° wall</span>
+      <span class="tag sim"><i></i>Simulation · teacher policy · 90° wall<a class="mk mk-sim" href="#status-key" title="Policy in simulation: not yet deployed on the robot"><span class="sr">Policy in simulation only; see the status key</span></a></span>
       <button class="vbtn" type="button" aria-label="Pause the video"><svg viewBox="0 0 18 18" aria-hidden="true"><path class="i-pause" d="M4 2.5h3.4v13H4zM10.6 2.5H14v13h-3.4z" fill="currentColor"/><path class="i-play" d="M5 2.5v13l11-6.5z" fill="currentColor"/></svg></button>
     </div>
   </div>
@@ -84,14 +85,14 @@
       <h3>A generated reference up an exterior corner.<br>Every latch and release decided by the spine model.</h3>
       <div class="ph media">
         <video data-src="media/ref-corner.mp4" poster="media/ref-corner.jpg" muted playsinline preload="none" disablepictureinpicture aria-label="A simulated humanoid climbs the exterior corner of a tall box one limb at a time, its spine palms on both faces of the corner."></video>
-        <span class="tag sim"><i></i>Simulation · generated reference</span>
+        <span class="tag sim"><i></i>Simulation · generated reference<a class="mk mk-ref" href="#status-key" title="Reference only: no policy trained on it yet"><span class="sr">Reference only; see the status key</span></a></span>
       </div>
     </article>
     <article class="hcard" aria-roledescription="slide" aria-label="2 of 3">
       <h3>One spine palm flips a cinder block.<br>By hand, and in simulation.</h3>
       <div class="ph media">
         <video class="fit" data-src="media/flip-pair.mp4" data-src-sm="media/flip-pair-sm.mp4" poster="media/flip-pair.jpg" data-poster-sm="media/flip-pair-sm.jpg" muted playsinline preload="none" disablepictureinpicture aria-label="Left: a person hooks a hand-held spine palm onto a cinder block and flips it upright. Right: the simulated humanoid does the same with the spine contact model."></video>
-        <span class="tag hw"><i></i>Bench and simulation</span>
+        <span class="tag hw"><i></i>Bench and simulation<a class="mk mk-ref" href="#status-key" title="Reference only: no policy trained on it yet"><span class="sr">Reference only; see the status key</span></a></span>
       </div>
     </article>
     <article class="hcard" aria-roledescription="slide" aria-label="3 of 3">
@@ -258,7 +259,7 @@
               <figcaption><b>Bench</b> a hand-held spine palm</figcaption>
             </figure>
             <figure class="pp">
-              <div class="pv"><video data-src="media/flip-sim.mp4" poster="media/flip-sim.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="The simulated humanoid squats, hooks its right-hand palm onto a block and flips it."></video><span class="tag sim"><i></i>Simulation</span></div>
+              <div class="pv"><video data-src="media/flip-sim.mp4" poster="media/flip-sim.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="The simulated humanoid squats, hooks its right-hand palm onto a block and flips it."></video><span class="tag sim"><i></i>Simulation<a class="mk mk-ref" href="#status-key" title="Reference only: no policy trained on it yet"><span class="sr">Reference only; see the status key</span></a></span></div>
               <figcaption><b>Simulation</b> the humanoid, with the contact model</figcaption>
             </figure>
           </div>
@@ -503,11 +504,11 @@
     <div class="pair rv" data-pair>
       <div class="pair-grid stack-sm">
         <figure class="pp">
-          <div class="pv"><video data-src="media/ref-flip.mp4" poster="media/ref-flip.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="The simulated humanoid kneels beside a cinder block, hooks its right spine palm onto the block's end face, turns the block past balance and lets go as it stands upright."></video><span class="tag sim"><i></i>Generated</span></div>
+          <div class="pv"><video data-src="media/ref-flip.mp4" poster="media/ref-flip.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="The simulated humanoid kneels beside a cinder block, hooks its right spine palm onto the block's end face, turns the block past balance and lets go as it stands upright."></video><span class="tag sim"><i></i>Generated<a class="mk mk-ref" href="#status-key" title="Reference only: no policy trained on it yet"><span class="sr">Reference only; see the status key</span></a></span></div>
           <figcaption><b>Block flip</b> approach, preload, load, lift, ease, let out, unload, withdraw</figcaption>
         </figure>
         <figure class="pp">
-          <div class="pv"><video data-src="media/ref-corner.mp4" poster="media/ref-corner.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="The simulated humanoid climbs an exterior corner, moving one limb at a time while the other three stay latched."></video><span class="tag sim"><i></i>Generated</span></div>
+          <div class="pv"><video data-src="media/ref-corner.mp4" poster="media/ref-corner.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="The simulated humanoid climbs an exterior corner, moving one limb at a time while the other three stay latched."></video><span class="tag sim"><i></i>Generated<a class="mk mk-ref" href="#status-key" title="Reference only: no policy trained on it yet"><span class="sr">Reference only; see the status key</span></a></span></div>
           <figcaption><b>Exterior corner</b> per limb: shift, unload, swing, approach, preload, settle; feet first, 10&nbsp;cm a step</figcaption>
         </figure>
       </div>
@@ -574,7 +575,7 @@
     <div class="split rev">
       <div class="ph media rv" style="aspect-ratio:16/9" data-auto>
         <video data-src="media/ground-start.mp4" poster="media/ground-start.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="In simulation, the humanoid stands beside an inclined wall, then places its hands and feet on it."></video>
-        <span class="tag sim"><i></i>Simulation · policy · inclined wall</span>
+        <span class="tag sim"><i></i>Simulation · policy · inclined wall<a class="mk mk-sim" href="#status-key" title="Policy in simulation: not yet deployed on the robot"><span class="sr">Policy in simulation only; see the status key</span></a></span>
         <button class="vbtn" type="button" aria-label="Pause the video"><svg viewBox="0 0 18 18" aria-hidden="true"><path class="i-pause" d="M4 2.5h3.4v13H4zM10.6 2.5H14v13h-3.4z" fill="currentColor"/><path class="i-play" d="M5 2.5v13l11-6.5z" fill="currentColor"/></svg></button>
       </div>
       <div class="rv">
@@ -594,7 +595,7 @@
     <div class="frame rv">
       <div class="ph media" data-auto>
         <video data-src="media/hero-policy90.mp4" poster="media/hero-policy90.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="In simulation, the trained teacher policy holds a vertical wall and cycles its limbs through the engage schedule."></video>
-        <span class="tag sim"><i></i>Simulation · teacher policy · 90° wall</span>
+        <span class="tag sim"><i></i>Simulation · teacher policy · 90° wall<a class="mk mk-sim" href="#status-key" title="Policy in simulation: not yet deployed on the robot"><span class="sr">Policy in simulation only; see the status key</span></a></span>
         <button class="vbtn" type="button" aria-label="Pause the video"><svg viewBox="0 0 18 18" aria-hidden="true"><path class="i-pause" d="M4 2.5h3.4v13H4zM10.6 2.5H14v13h-3.4z" fill="currentColor"/><path class="i-play" d="M5 2.5v13l11-6.5z" fill="currentColor"/></svg></button>
       </div>
     </div>
@@ -654,7 +655,6 @@
         </article>
       </div>
     </details>
-    <p class="scope rv" id="scope"><b>Scope.</b> Every climb on this page is in simulation. Both policies track kinematic references made before the generator above; teachers on generated references and the distilled student are not shown here.</p>
   </div>
 </section>
 
@@ -741,6 +741,34 @@
         </div>
       </div>
     </details>
+  </div>
+</section>
+
+<!-- STATUS KEY -->
+<section class="sec" id="status-key" aria-labelledby="key-title">
+  <div class="wrap-mid">
+    <p class="eyebrow rv">Status key</p>
+    <h2 class="hl-head rv" id="key-title">Not finished yet.</h2>
+    <p class="lede rv" style="margin-top:16px">A mark on a clip says how far its task has come. Clips without a mark are complete as shown.</p>
+    <div class="keys">
+      <article class="key rv">
+        <span class="mk mk-ref" aria-hidden="true"></span>
+        <div>
+          <h3>Reference only</h3>
+          <p>A generated or scripted reference motion. No policy has been trained on it yet.</p>
+          <p class="key-items">Block flip · exterior corner</p>
+        </div>
+      </article>
+      <article class="key rv">
+        <span class="mk mk-sim" aria-hidden="true"></span>
+        <div>
+          <h3>Policy in simulation</h3>
+          <p>A trained policy that so far runs only in simulation. It has not been deployed on the robot.</p>
+          <p class="key-items">Ground to wall · vertical wall</p>
+        </div>
+      </article>
+    </div>
+    <p class="scope rv">Both policies track kinematic references made before the generator. Teachers on generated references, the distilled student and the skills without a result on this page (climb down, off the wall) have not been trained yet, and climbing on the real walls has not started.</p>
   </div>
 </section>
 
