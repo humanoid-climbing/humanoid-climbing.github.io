@@ -265,11 +265,6 @@ sup.fn a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 }
 @media (max-width:380px){.katex-display>.katex{font-size:.82em}.rcard{padding-inline:14px}}
 
-/* ---------- closer look: a full-width band with one explainer video ---------- */
-.look{background:linear-gradient(var(--page),var(--band) 30%)}
-.look .ph{aspect-ratio:16/9;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.05)}
-.look .ph video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff}
-
 /* ---------- side-by-side comparisons ---------- */
 .pair{margin-top:40px}
 .pair-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -352,33 +347,91 @@ sup.fn a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 @media (min-width:1069px){.figs{grid-template-columns:1fr 1fr;gap:20px}}
 
 /* ---------- hardware: run procedure ---------- */
-.run{margin-top:0}
-.run-track{gap:12px;padding-bottom:4px}
-.run-step{width:min(44vw, 200px);margin:0}
-.run-step .ph{aspect-ratio:3/4;border-radius:18px}
 .run-step h4{margin:12px 2px 0;font:600 15px/1.3 var(--display);letter-spacing:-.01em}
 .run-step h4 span{display:inline-block;min-width:1.4em;color:var(--ink2);font-family:var(--mono);font-weight:500}
 .run-step p{margin:4px 2px 0;font-size:13px;line-height:1.4;color:var(--ink2)}
-@media (min-width:1069px){
-  .run-track{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;overflow:visible;padding-inline:0;width:min(var(--wide), calc(100% - 2 * var(--gut)));margin-inline:auto}
-  .run-track::after{display:none}
-  .run-step{width:auto}
-}
 .run-note{margin-block:22px 0;font-size:14px;line-height:1.5;color:var(--ink2)}
 
 /* control software: four columns */
-.stack{margin-top:20px}
+.stack{margin-top:40px}
 .stack .chain>li ul{margin:10px 0 0;padding:0;list-style:none;display:grid;gap:6px}
 .stack .chain>li ul li{padding:8px 10px;border-radius:10px;background:var(--page);font-size:13px;line-height:1.35;color:var(--ink)}
 .stack .chain>li ul li i{font-style:normal;color:var(--ink2)}
 @media (min-width:900px){.stack .chain{grid-template-columns:1fr .8fr 1.5fr 1.1fr;grid-auto-flow:row}}
 
-/* ---------- test walls ---------- */
-.gallery{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.gallery figure .ph{aspect-ratio:4/3;border-radius:18px}
-.gallery figcaption{margin:8px 2px 0;font-size:13px;line-height:1.4;color:var(--ink2)}
-.gallery figcaption span{font-family:var(--mono);color:var(--ink)}
-@media (min-width:900px){.gallery{grid-template-columns:repeat(3,1fr);gap:20px}.gallery figcaption{font-size:14px}}
+/* ---------- explorers: one panel at a time, picked from a segmented bar or a figure ---------- */
+.narrow{max-width:var(--mid);margin-inline:auto}
+.seg{position:relative;display:flex;gap:4px;width:max-content;max-width:100%;margin:0 auto 32px;padding:4px;border-radius:999px;background:var(--fill);overflow-x:auto;scrollbar-width:none}
+.seg::-webkit-scrollbar{display:none}
+.seg [role=tab]{flex:none;height:36px;padding:0 16px;border:0;border-radius:999px;background:none;font:500 14px/1 var(--text);letter-spacing:0;color:var(--ink2);white-space:nowrap;transition:background .25s var(--ease),color .25s var(--ease)}
+.seg [role=tab]:hover{color:var(--ink)}
+.seg [role=tab][aria-selected=true]{background:var(--page);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+html:not(.js) .seg{display:none}
+html:not(.js) .tabpanel+.tabpanel{margin-top:56px}
+.js .tabpanel:not(.on){display:none}
+.js .tabpanel.on{animation:panel-in .45s var(--ease)}
+@keyframes panel-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.tabpanel>.rcard{max-width:760px;margin-inline:auto}
+.tabpanel>.rewards{margin-top:0}
+.panel-lede{margin:0 auto 28px;max-width:44em;text-align:center;font-size:17px;line-height:1.47;color:var(--ink2);text-wrap:balance}
+.panel-lede b{color:var(--ink);font-weight:400}
+.tab-next{display:flex;align-items:center;gap:6px;min-height:44px;margin:28px auto 0;padding:0 4px;border:0;background:none;color:var(--blue);font-size:17px}
+.tab-next:hover{text-decoration:underline}
+.tabpanel .squat{margin-top:64px}
+@media (min-width:735px){.seg{margin-bottom:44px}.seg [role=tab]{height:40px;padding:0 20px;font-size:15px}.panel-lede{font-size:19px;margin-bottom:36px}}
+
+/* the pipeline figure: each block is a button over the image; phones scroll it sideways */
+.fig-scroll{overflow-x:auto;margin-bottom:28px;padding:20px;border-radius:28px;background:#fff;overscroll-behavior-x:contain}
+.fig-map{position:relative;min-width:720px}
+.fig-map img{width:100%;height:auto}
+.hot-area{position:absolute;display:block;padding:0;border:0;border-radius:12px;background:transparent;cursor:pointer;transition:background .2s var(--ease),box-shadow .2s var(--ease)}
+.hot-area:hover{background:rgba(0,113,227,.06);box-shadow:0 0 0 2px rgba(0,113,227,.5);text-decoration:none}
+.hot-area.on{box-shadow:0 0 0 3px var(--blue)}
+.hot-area.sub{border-radius:8px}
+.fig-hint{display:none;margin:-16px 0 24px;text-align:center;font-size:13px;color:var(--ink2)}
+@media (max-width:734px){.fig-scroll{padding:12px;border-radius:18px}.fig-hint{display:block}}
+
+/* horizontal tracks of cards with a counter and arrows */
+.scroller-bar{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.scroller-bar .count{margin-right:auto;font:500 13px/1 var(--mono);color:var(--ink2);font-variant-numeric:tabular-nums}
+.scroller.fits .scroller-bar{display:none}
+html:not(.js) .scroller-bar{display:none}
+.arw{width:36px;height:36px;padding:0;border:0;border-radius:50%;background:var(--fill);color:var(--ink);display:grid;place-items:center}
+.arw:hover{background:var(--hair)}
+.arw:disabled{opacity:.35;cursor:default;background:var(--fill)}
+.arw svg{width:16px;height:16px}
+.strack{position:relative;display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;counter-reset:st}
+.strack::-webkit-scrollbar{display:none}
+.strack>*{flex:0 0 min(86%,440px);scroll-snap-align:start}
+.strack>.step{transition:box-shadow .3s var(--ease)}
+.strack>.step.flash{box-shadow:0 0 0 2px var(--blue)}
+.strack.photos>*{flex-basis:min(78%,360px)}
+.strack.photos .ph{aspect-ratio:4/3;border-radius:18px}
+.strack.photos figcaption{margin:8px 2px 0;font-size:13px;line-height:1.4;color:var(--ink2)}
+.strack.photos figcaption span{font-family:var(--mono);color:var(--ink)}
+.strack.runs>*{flex-basis:min(44vw,196px)}
+.run-step .ph{aspect-ratio:3/4;border-radius:18px}
+@media (min-width:735px){.strack{gap:16px}.strack.photos figcaption{font-size:14px}}
+.model.in-panel{margin-top:0}
+.band .model{background:var(--page)}
+.band .model .step{background:var(--band)}
+.look-in .ph{aspect-ratio:16/9;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.05)}
+.look-in .ph video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff}
+
+/* closed by default: detail a reader can open */
+.more{margin-top:40px;padding:0 20px;border-radius:28px;background:var(--band)}
+.band .more{background:var(--page)}
+.more>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:44px;padding:22px 4px;cursor:pointer}
+.more>summary::-webkit-details-marker{display:none}
+.more>summary>span{display:flex;flex-direction:column;gap:4px;font-size:15px;line-height:1.4;color:var(--ink2)}
+.more>summary b{font:600 21px/1.2 var(--display);letter-spacing:-.01em;color:var(--ink)}
+.more>summary svg{flex:none;width:20px;height:20px;color:var(--ink2);transition:transform .35s var(--ease)}
+.more[open]>summary svg{transform:rotate(180deg)}
+.more[open]{padding-bottom:20px}
+.more .rcard{background:var(--page)}
+.band .more .rcard,.band .more .tile{background:var(--band)}
+.more .figs{margin-top:0}
+@media (min-width:735px){.more{padding:0 32px}.more>summary{padding:28px 4px}.more>summary b{font-size:24px}.more[open]{padding-bottom:32px}}
 
 /* ---------- status board ---------- */
 .board{display:grid;gap:16px;margin-top:56px}
@@ -443,5 +496,6 @@ footer a{color:var(--ink2);text-decoration:underline;text-underline-offset:2px}
   html{scroll-behavior:auto}
   .js .rv{opacity:1;transform:none;transition:none}
   .wip-dot::after{animation:none}
-  .dot,.dot i,.faq summary svg,.faq-all svg,.qtile{transition:none}
+  .dot,.dot i,.faq summary svg,.faq-all svg,.qtile,.more>summary svg,.hot-area,.seg [role=tab]{transition:none}
+  .js .tabpanel.on{animation:none}
 }

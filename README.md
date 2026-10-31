@@ -5,7 +5,7 @@ Links to `../` and `../images/` resolve to the homepage repository, `SXuanAlan.g
 
 - `index.html`: the page.
 - `assets/`: stylesheet and script (no build step).
-- `media/`: videos and their posters, figures.
+- `media/`: videos and their posters, figures. `pipeline.png` is rendered from the source slide figure `artifacts/MRGP.svg` in the code repository (cairosvg at 2400 px wide, 64 colours).
 
 Preview locally from the folder: `python -m http.server`, then open <http://localhost:8000/>.
 Source slides in `external_references/` are not tracked.
