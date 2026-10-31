@@ -1,7 +1,7 @@
 # Humanoid Wall Climbing: project page
 
-Static project page, served by GitHub Pages at <https://sxuanalan.github.io/climbing/>.
-Links to `../` and `../images/` resolve to the homepage repository, `SXuanAlan.github.io`.
+Static project page, served by GitHub Pages from the `humanoid-climbing` organization at <https://humanoid-climbing.github.io/>.
+It stands on its own: links to the author's homepage are absolute (<https://sxuanalan.github.io/>), and the icons are in `assets/`.
 
 - `index.html`: the page.
 - `assets/`: stylesheet and script (no build step).
