@@ -152,47 +152,10 @@
 
   <div class="wrap block explorer" data-tabs>
     <div class="seg rv" role="tablist" aria-label="Contact model">
-      <button role="tab" type="button" id="mt-unit" aria-controls="mp-unit" aria-selected="true">Spine unit</button>
-      <button role="tab" type="button" id="mt-bench" aria-controls="mp-bench">Bench test</button>
-      <button role="tab" type="button" id="mt-model" aria-controls="mp-model">Palm model</button>
+      <button role="tab" type="button" id="mt-model" aria-controls="mp-model" aria-selected="true">Palm model</button>
+      <button role="tab" type="button" id="mt-fab" aria-controls="mp-fab">Fabrication</button>
+      <button role="tab" type="button" id="mt-limit" aria-controls="mp-limit">Limit surface</button>
       <button role="tab" type="button" id="mt-check" aria-controls="mp-check">Checked on a task</button>
-    </div>
-
-    <div class="tabpanel" role="tabpanel" id="mp-unit" aria-labelledby="mt-unit">
-      <p class="panel-lede">A spine catches on a tiny bump when it is dragged the right way. Real walls are irregular, so not every spine finds one at once. <b>Each spine rides on its own spring and moves on its own</b>, so more of them end up in contact.<sup class="fn"><a href="#fn1" aria-label="Footnote 1">1</a></sup></p>
-      <div class="palm-pair">
-        <div class="ph media">
-          <img src="media/palm-tile.jpg" width="1600" height="1200" loading="lazy" alt="One spine unit: a clear block holding a grid of small springs, each with a spine through it.">
-          <span class="tag hw"><i></i>One spine unit</span>
-        </div>
-        <div class="ph media" data-auto>
-          <video data-src="media/spine-assembly.mp4" poster="media/spine-assembly.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="Gloved hands assembling spines for a unit."></video>
-          <span class="tag hw"><i></i>Assembly</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="tabpanel" role="tabpanel" id="mp-bench" aria-labelledby="mt-bench">
-      <div class="split">
-        <div class="ph media" style="aspect-ratio:16/9" data-auto>
-          <video data-src="media/unit-test.mp4" poster="media/unit-test.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="Close-up of one spine unit on a robot arm's flange, pressed against the top of a cinder block."></video>
-          <span class="tag hw"><i></i>Hardware · bench test</span>
-          <button class="vbtn" type="button" aria-label="Pause the video"><svg viewBox="0 0 18 18" aria-hidden="true"><path class="i-pause" d="M4 2.5h3.4v13H4zM10.6 2.5H14v13h-3.4z" fill="currentColor"/><path class="i-play" d="M5 2.5v13l11-6.5z" fill="currentColor"/></svg></button>
-        </div>
-        <div>
-          <p class="copy">A Rizon arm presses one unit onto a cinder block under force control. After a 10&nbsp;N preload, the shear and lateral loads ramp to a test point; the normal force then steps down through zero and into tension, 0.5&nbsp;N every 3&nbsp;s, until the unit lets go.</p>
-          <p class="copy"><b>With enough shear along the spines, a unit keeps holding while it is pulled away from the wall.</b> Against the rake it holds only while pressed.</p>
-        </div>
-      </div>
-      <figure class="tile" style="margin-top:20px">
-        <img src="media/unit-table.png" width="2640" height="880" loading="lazy" alt="Three plots of the single-unit table: pull-off force against shear with its strength quantiles and the trials, the failure probability against pull at four shear loads, and a map of the median pull-off force over shear and lateral load.">
-        <figcaption class="cap"><b>One unit, as the simulator draws it: 296 bench trials.</b> (a) Pull-off force at zero lateral load: the median and spread of the strength the plant draws for each unit, over the trials that let go under the pull. (b) The chance that a unit has let go as the pull rises, at four shear loads: \(\alpha\) in the palm model. (c) Median pull-off force over every tested shear and lateral load; below zero a unit holds only while pressed. The 21 trials that let go before the pull set the early-failure probability instead, and loads outside the tested range count as failures.</figcaption>
-      </figure>
-      <div class="jrow wrap-sm" style="margin-top:20px">
-        <figure class="full" style="--ar:1.333"><img src="media/bench-setup.jpg" width="1600" height="1200" loading="lazy" alt="The test bench: a white robot arm holding a spine unit against a cinder block on a lab table."></figure>
-        <figure style="--ar:1.5"><img src="media/bench-closeup.jpg" width="1600" height="1067" loading="lazy" alt="A spine unit mounted at the center of the arm's flange."></figure>
-        <figure style="--ar:1.5"><img src="media/bench-side.jpg" width="1600" height="1067" loading="lazy" alt="Side view of the unit's spines touching the cinder block."></figure>
-      </div>
     </div>
 
     <div class="tabpanel" role="tabpanel" id="mp-model" aria-labelledby="mt-model">
@@ -245,6 +208,43 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <div class="tabpanel" role="tabpanel" id="mp-fab" aria-labelledby="mt-fab">
+      <p class="panel-lede">A spine catches on a tiny bump when it is dragged the right way. Real walls are irregular, so not every spine finds one at once. <b>Each spine rides on its own spring and moves on its own</b>, so more of them end up in contact.<sup class="fn"><a href="#fn1" aria-label="Footnote 1">1</a></sup></p>
+      <div class="palm-pair">
+        <div class="ph media">
+          <img src="media/palm-tile.jpg" width="1600" height="1200" loading="lazy" alt="One spine unit: a clear block holding a grid of small springs, each with a spine through it.">
+          <span class="tag hw"><i></i>One spine unit</span>
+        </div>
+        <div class="ph media" data-auto>
+          <video data-src="media/spine-assembly.mp4" poster="media/spine-assembly.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="Gloved hands assembling spines for a unit."></video>
+          <span class="tag hw"><i></i>Assembly</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tabpanel" role="tabpanel" id="mp-limit" aria-labelledby="mt-limit">
+      <div class="split">
+        <div class="ph media" style="aspect-ratio:16/9" data-auto>
+          <video data-src="media/unit-test.mp4" poster="media/unit-test.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="Close-up of one spine unit on a robot arm's flange, pressed against the top of a cinder block."></video>
+          <span class="tag hw"><i></i>Hardware · bench test</span>
+          <button class="vbtn" type="button" aria-label="Pause the video"><svg viewBox="0 0 18 18" aria-hidden="true"><path class="i-pause" d="M4 2.5h3.4v13H4zM10.6 2.5H14v13h-3.4z" fill="currentColor"/><path class="i-play" d="M5 2.5v13l11-6.5z" fill="currentColor"/></svg></button>
+        </div>
+        <div>
+          <p class="copy">A Rizon arm presses one unit onto a cinder block under force control. After a 10&nbsp;N preload, the shear and lateral loads ramp to a test point; the normal force then steps down through zero and into tension, 0.5&nbsp;N every 3&nbsp;s, until the unit lets go.</p>
+          <p class="copy"><b>With enough shear along the spines, a unit keeps holding while it is pulled away from the wall.</b> Against the rake it holds only while pressed.</p>
+        </div>
+      </div>
+      <figure class="tile" style="margin-top:20px">
+        <img src="media/unit-table.png" width="2640" height="880" loading="lazy" alt="Three plots of the single-unit table: pull-off force against shear with its strength quantiles and the trials, the failure probability against pull at four shear loads, and a map of the median pull-off force over shear and lateral load.">
+        <figcaption class="cap"><b>One unit, as the simulator draws it: 296 bench trials.</b> (a) Pull-off force at zero lateral load: the median and spread of the strength the plant draws for each unit, over the trials that let go under the pull. (b) The chance that a unit has let go as the pull rises, at four shear loads: \(\alpha\) in the palm model. (c) Median pull-off force over every tested shear and lateral load; below zero a unit holds only while pressed. The 21 trials that let go before the pull set the early-failure probability instead, and loads outside the tested range count as failures.</figcaption>
+      </figure>
+      <div class="jrow wrap-sm" style="margin-top:20px">
+        <figure class="full" style="--ar:1.333"><img src="media/bench-setup.jpg" width="1600" height="1200" loading="lazy" alt="The test bench: a white robot arm holding a spine unit against a cinder block on a lab table."></figure>
+        <figure style="--ar:1.5"><img src="media/bench-closeup.jpg" width="1600" height="1067" loading="lazy" alt="A spine unit mounted at the center of the arm's flange."></figure>
+        <figure style="--ar:1.5"><img src="media/bench-side.jpg" width="1600" height="1067" loading="lazy" alt="Side view of the unit's spines touching the cinder block."></figure>
       </div>
     </div>
 
