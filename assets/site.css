@@ -395,6 +395,9 @@ details.more .figs{margin-top:0}
 details.more .stage{background:var(--page)}
 details.more .stage .chain>li{background:var(--band);box-shadow:none}
 details.more .stage .chain>li.hot{box-shadow:0 0 0 2px var(--blue)}
+.band details.more .stage{background:var(--band)}
+.band details.more .stage .chain>li{background:var(--page)}
+.band details.more .stack .chain>li ul li{background:var(--band)}
 @media (min-width:735px){details.more{padding:0 32px}details.more>summary{padding:28px 4px}details.more>summary b{font-size:24px}details.more[open]{padding-bottom:32px}}
 
 /* the palm-model animation: plays inline on a white plate, with chapter jumps below */
@@ -420,7 +423,7 @@ details.more .stage .chain>li.hot{box-shadow:0 0 0 2px var(--blue)}
 .squat-pair{max-width:640px;margin:32px auto 0}
 
 /* ---------- notes, team, footer ---------- */
-.notes{padding-block:48px 40px;font-size:12px;line-height:1.5;color:var(--ink2)}
+.notes{padding-block:48px 40px;border-top:1px solid var(--hair);font-size:12px;line-height:1.5;color:var(--ink2)}
 .notes ol{margin:0;padding-left:1.4em;display:grid;gap:10px}
 .notes a{word-break:break-word}
 .team{text-align:center}

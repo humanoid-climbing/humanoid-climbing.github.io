@@ -9,6 +9,7 @@ Links to `../` and `../images/` resolve to the homepage repository, `SXuanAlan.g
   - `pipeline.png` is rendered from the slide figure `artifacts/MRGP.svg` (cairosvg at 2400 px wide, 64 colours).
   - `unit-table.png` is drawn by `tools/unit_table_figure.py` from the packaged unit table and its bench trials; run it with that repository's environment.
   - `human-climb.mp4` is `artifacts/human_climb.mp4`, cropped to 16:9 from the top and scaled to 1280 × 720, without sound.
+  - `palm-model.mp4` and its poster are rendered in the page's palette by `tools/palm-model-animation/`.
 - `tools/`: scripts that regenerate figures.
 
 Preview locally from the folder: `python -m http.server`, then open <http://localhost:8000/>.

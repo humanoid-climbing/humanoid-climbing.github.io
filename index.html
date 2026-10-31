@@ -45,6 +45,7 @@
       <a href="#reference">Reference generation</a>
       <a href="#policy">Policy learning</a>
       <a href="#results">Results</a>
+      <a href="#walls">Test walls</a>
       <a href="#supp">Supplementary</a>
       <a href="#team">Citation</a>
     </div>
@@ -276,16 +277,16 @@
     </div>
     <div class="anim-scroll rv">
     <div class="anim" data-auto>
-      <video id="animVideo" data-src="media/survival-model.mp4" poster="media/survival-model.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="Animation of the palm model: a three-by-four spine palm under a pull and a shear load loses units round by round while a tree of outcomes grows beside it, then many sampled draws run down the same tree."></video>
+      <video id="animVideo" data-src="media/palm-model.mp4" poster="media/palm-model.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="Animation of the palm model: a three-by-four spine palm under a pull and a shear load loses units round by round while a tree of outcomes grows beside it, then many sampled draws run down the same tree."></video>
       <button class="vbtn" type="button" aria-label="Pause the animation"><svg viewBox="0 0 18 18" aria-hidden="true"><path class="i-pause" d="M4 2.5h3.4v13H4zM10.6 2.5H14v13h-3.4z" fill="currentColor"/><path class="i-play" d="M5 2.5v13l11-6.5z" fill="currentColor"/></svg></button>
     </div>
     </div>
     <p class="fig-hint anim-hint">Swipe the animation sideways to read it.</p>
     <div class="chapters rv" data-chapters="animVideo" role="group" aria-label="Jump to a part of the animation">
-      <button type="button" data-t="0" aria-pressed="true">Palm and load</button>
-      <button type="button" data-t="3" aria-pressed="false">Round 1</button>
+      <button type="button" data-t="0" aria-pressed="true">Pad and load</button>
+      <button type="button" data-t="2.5" aria-pressed="false">Round 1</button>
       <button type="button" data-t="12" aria-pressed="false">Rounds 2–4</button>
-      <button type="button" data-t="26" aria-pressed="false">Many samples</button>
+      <button type="button" data-t="25.4" aria-pressed="false">Many samples</button>
     </div>
     <p class="cap rv">The 3 × 4 palm seen from outside the wall, under an 8&nbsp;N pull and 90&nbsp;N of shear. Each round, overloaded units fail together and the load is shared again. Followed exactly, the tree gives a 58.4% chance that the palm holds; 600 draws, run the way the simulator runs them, give 56.3%.</p>
   </div>
@@ -656,11 +657,45 @@
   </div>
 </section>
 
+<!-- TEST WALLS -->
+<section class="sec" id="walls">
+  <div class="wrap-copy story-head">
+    <p class="eyebrow rv">Infrastructure</p>
+    <h2 class="hx rv">Walls to <br>climb on.</h2>
+    <p class="lede rv">Two walls for the climbs on hardware. <b>A rough stucco panel, close to a real outdoor wall, for the spines to grip, and a full-height wall on an aluminum-extrusion frame.</b></p>
+  </div>
+  <div class="wrap block">
+    <div class="block-head"><h3 class="sub-head rv">A stucco panel, made by hand.</h3></div>
+    <div class="scroller rv" data-scroller>
+      <div class="scroller-bar">
+        <span class="count" aria-live="polite"></span>
+        <button class="arw prev" type="button" aria-label="Previous photo"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="arw next" type="button" aria-label="Next photo"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+      <div class="strack photos">
+        <figure><div class="ph media"><img src="media/stucco-1.jpg" width="1200" height="1019" loading="lazy" alt="Metal lath, lumber and tools laid out on the ground."></div><figcaption><span>1</span> Materials: metal lath, lumber, tools.</figcaption></figure>
+        <figure><div class="ph media"><img src="media/stucco-2.jpg" width="1200" height="929" loading="lazy" alt="Metal lath screwed onto a plywood board."></div><figcaption><span>2</span> Metal lath fixed onto a plywood backing.</figcaption></figure>
+        <figure><div class="ph media"><img src="media/stucco-3.jpg" width="1200" height="751" loading="lazy" alt="A bag of stucco mix."></div><figcaption><span>3</span> Stucco mix.</figcaption></figure>
+        <figure><div class="ph media"><img src="media/stucco-4.jpg" width="1200" height="900" loading="lazy" alt="Wet stucco being mixed in a bucket with a trowel."></div><figcaption><span>4</span> Mixed, then applied over the lath.</figcaption></figure>
+        <figure><div class="ph media"><img src="media/stucco-5.jpg" width="1200" height="1318" loading="lazy" alt="The stucco panel after drying, with a rough grey surface."></div><figcaption><span>5</span> Dried overnight under a plastic sheet.</figcaption></figure>
+        <figure><div class="ph media" data-auto><video data-src="media/stucco-spines.mp4" poster="media/stucco-spines.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="A row of spine units dragged across the dried stucco."></video></div><figcaption><span>6</span> Spines on the finished surface.</figcaption></figure>
+      </div>
+    </div>
+  </div>
+  <div class="wrap block">
+    <div class="block-head"><h3 class="sub-head rv">A full-height wall frame.</h3></div>
+    <div class="jrow wrap-sm rv">
+      <figure style="--ar:.75"><img src="media/wall-1.jpg" width="1200" height="1600" loading="lazy" alt="A tall test wall panel standing in an aluminum-extrusion frame outdoors."><figcaption>The wall panel in its aluminum-extrusion frame.</figcaption></figure>
+      <figure style="--ar:1.333"><img src="media/wall-2.jpg" width="1600" height="1200" loading="lazy" alt="The wall frame from the side, with a plywood panel and diagonal braces."><figcaption>From the side: a plywood panel on diagonal braces.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
 <!-- SUPPLEMENTARY -->
-<section class="sec" id="supp">
+<section class="sec band" id="supp">
   <div class="wrap">
     <p class="eyebrow rv">Supplementary</p>
-    <h2 class="hl-head rv">On the real robot and the test walls.</h2>
+    <h2 class="hl-head rv">On the real robot.</h2>
     <details class="more" id="supp-robot">
       <summary><span><b>Bringing up the real robot</b>The deployment stack, and a first sim-to-real test on the ground</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 7l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
       <div class="scroller" data-scroller>
@@ -702,26 +737,6 @@
         <div class="pbar">
           <p class="pcap">One squat policy, started two ways. Training also randomizes friction independently on each foot.</p>
           <button class="fplay" type="button" aria-label="Pause the videos"><svg viewBox="0 0 18 18" aria-hidden="true"><path class="i-pause" d="M4 2.5h3.4v13H4zM10.6 2.5H14v13h-3.4z" fill="currentColor"/><path class="i-play" d="M5 2.5v13l11-6.5z" fill="currentColor"/></svg></button>
-        </div>
-      </div>
-    </details>
-    <details class="more" id="supp-walls">
-      <summary><span><b>Test walls</b>A stucco panel and a full-height wall frame, built for the first real climbs</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 7l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-      <div class="scroller" data-scroller>
-        <div class="scroller-bar">
-          <span class="count" aria-live="polite"></span>
-          <button class="arw prev" type="button" aria-label="Previous photo"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          <button class="arw next" type="button" aria-label="Next photo"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        </div>
-        <div class="strack photos">
-          <figure><div class="ph media"><img src="media/stucco-1.jpg" width="1200" height="1019" loading="lazy" alt="Metal lath, lumber and tools laid out on the ground."></div><figcaption><span>1</span> Materials: metal lath, lumber, tools.</figcaption></figure>
-          <figure><div class="ph media"><img src="media/stucco-2.jpg" width="1200" height="929" loading="lazy" alt="Metal lath screwed onto a plywood board."></div><figcaption><span>2</span> Metal lath fixed onto a plywood backing.</figcaption></figure>
-          <figure><div class="ph media"><img src="media/stucco-3.jpg" width="1200" height="751" loading="lazy" alt="A bag of stucco mix."></div><figcaption><span>3</span> Stucco mix.</figcaption></figure>
-          <figure><div class="ph media"><img src="media/stucco-4.jpg" width="1200" height="900" loading="lazy" alt="Wet stucco being mixed in a bucket with a trowel."></div><figcaption><span>4</span> Mixed, then applied over the lath.</figcaption></figure>
-          <figure><div class="ph media"><img src="media/stucco-5.jpg" width="1200" height="1318" loading="lazy" alt="The stucco panel after drying, with a rough grey surface."></div><figcaption><span>5</span> Dried overnight under a plastic sheet.</figcaption></figure>
-          <figure><div class="ph media" data-auto><video data-src="media/stucco-spines.mp4" poster="media/stucco-spines.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="A row of spine units dragged across the dried stucco."></video></div><figcaption><span>6</span> Spines on the finished surface.</figcaption></figure>
-          <figure><div class="ph media"><img src="media/wall-1.jpg" width="1200" height="1600" loading="lazy" alt="A tall test wall panel standing in an aluminum-extrusion frame outdoors."></div><figcaption><span>7</span> The full-height wall on its aluminum-extrusion frame.</figcaption></figure>
-          <figure><div class="ph media"><img src="media/wall-2.jpg" width="1600" height="1200" loading="lazy" alt="The wall frame from the side, with a plywood panel and diagonal braces."></div><figcaption><span>8</span> The same wall from the side, with its braces.</figcaption></figure>
         </div>
       </div>
     </details>
