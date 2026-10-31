@@ -23,13 +23,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
-<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/site.css?v=778e8248">
 <link rel="preload" as="image" href="media/hero-policy90.jpg" fetchpriority="high">
 <!-- inline so the reveal styles (.js .rv) apply from the first paint -->
 <script>document.documentElement.classList.add("js")</script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
-<script defer src="assets/site.js" onerror="document.documentElement.classList.remove('js')"></script>
+<script defer src="assets/site.js?v=95553cb0" onerror="document.documentElement.classList.remove('js')"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -302,10 +302,26 @@
     <p class="lede rv">Twelve units share one plate that turns freely on the limb, so the limb passes only a force through the hinge. <b>Where that hinge sits decides how the force reaches the units</b>: above the spine face, shear becomes a peeling moment that lifts the top row; off centre along the face, the normal force does the same.</p>
   </div>
   <div class="wrap block">
-    <div class="jrow wrap-sm palm-cad rv">
-      <figure style="--ar:.722"><img src="media/palm-cad.jpg" width="900" height="1247" loading="lazy" alt="CAD render of the assembled palm: twelve spine units in three rows of four on a plate above a cylindrical mount."><figcaption>Twelve units, in three rows of four, make one palm.</figcaption></figure>
-      <figure class="full" style="--ar:1.363"><img src="media/palm-exploded.jpg" width="1600" height="1174" loading="lazy" alt="Exploded CAD view of the palm: backing plate, unit rows, frame, mounts and a self-aligning bearing."><figcaption>Exploded view. A self-aligning bearing between palm and limb allows limited rotation instead of a rigid mount.</figcaption></figure>
-      <figure style="--ar:.757"><img src="media/sim-palms.jpg" width="634" height="838" loading="lazy" alt="Simulated humanoid on a wall with green spine palms on both hands and both feet."><figcaption>In simulation, palms on both hands and both feet.</figcaption></figure>
+    <div class="block-head">
+      <h3 class="sub-head rv">Two iterations, closer to the wall.</h3>
+      <p class="lede rv">Each version moves the hinge toward the spine face. <b>The second sits much closer than the first, but its force line still misses the array centre.</b></p>
+    </div>
+    <div class="scroller rv" data-scroller>
+        <div class="scroller-bar">
+          <span class="count" aria-live="polite"></span>
+          <button class="arw prev" type="button" aria-label="Previous card"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button class="arw next" type="button" aria-label="Next card"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      <div class="strack iters">
+        <figure><div class="iter-media"><img src="media/palm-cad.jpg" width="900" height="1247" loading="lazy" alt="CAD render of the first palm: twelve spine units in three rows of four on a plate above a cylindrical mount."></div><figcaption><span class="it">Iteration 1</span>Twelve units, in three rows of four, on one plate.</figcaption></figure>
+        <figure><div class="iter-media"><img src="media/palm-exploded.jpg" width="1600" height="1174" loading="lazy" alt="Exploded CAD view of the first palm: backing plate, unit rows, frame, mounts and a self-aligning bearing."></div><figcaption><span class="it">Iteration 1</span>Exploded: a self-aligning bearing lets the palm turn on the limb instead of a rigid mount.</figcaption></figure>
+        <figure><div class="iter-media"><img src="media/sim-palms.jpg" width="634" height="838" loading="lazy" alt="Simulated humanoid on a wall with green spine palms on both hands and both feet."></div><figcaption><span class="it">Iteration 1</span>In simulation, palms on both hands and both feet.</figcaption></figure>
+        <figure><div class="iter-media"><img src="media/palm1-hinge.png" width="1096" height="1130" loading="lazy" alt="Side view of the first palm on a wall: the bearing centre B sits 47.5 mm off the wall and 78 mm below the spine-array centre C; shear S and pull T create a peel moment about C."></div><figcaption><span class="it">Iteration 1</span><b>Where it hinges.</b> The bearing centre sits 47.5&nbsp;mm off the wall and 78&nbsp;mm below the array centre \(C\), so shear and pull pry off the top row: \(M=0.0475\,S-0.078\,T\).</figcaption></figure>
+        <figure><div class="iter-media tbl"><table class="hold"><caption class="sr">Hold probability of iteration 1 by shear and pull</caption><thead><tr><th scope="col" class="axes">S&nbsp;↓ T&nbsp;→</th><th scope="col">−20<small>press</small></th><th scope="col">0</th><th scope="col">10</th><th scope="col">20</th><th scope="col">30</th><th scope="col">45</th></tr></thead><tbody><tr><th scope="row">50</th><td style="background:#cfe0fa">1.00</td><td style="background:#cfe0fa">1.00</td><td style="background:#efeeed">0.52</td><td style="background:#f6d1cc">0.01</td><td style="background:#f6d0cb">0</td><td style="background:#f6d0cb">0</td></tr><tr><th scope="row">100</th><td style="background:#cfe0fa">1.00</td><td style="background:#cfe0fa">1.00</td><td style="background:#d1e1f9">0.97</td><td style="background:#f2e5e1">0.34</td><td style="background:#f6d1cc">0.01</td><td style="background:#f6d0cb">0</td></tr><tr><th scope="row">150</th><td style="background:#d0e0fa">0.99</td><td style="background:#d0e0fa">0.99</td><td style="background:#d0e1f9">0.98</td><td style="background:#dce6f5">0.81</td><td style="background:#f4dbd7">0.18</td><td style="background:#f6d0cb">0</td></tr><tr><th scope="row">200</th><td style="background:#d4e2f8">0.93</td><td style="background:#d6e3f7">0.90</td><td style="background:#d7e4f7">0.88</td><td style="background:#e0e8f3">0.74</td><td style="background:#f2e6e3">0.36</td><td style="background:#f6d1cc">0.01</td></tr><tr><th scope="row">250</th><td style="background:#d4e2f8">0.92</td><td style="background:#d5e3f7">0.91</td><td style="background:#dae5f5">0.83</td><td style="background:#e9ecef">0.60</td><td style="background:#f4dcd8">0.20</td><td style="background:#f6d1cc">0.02</td></tr></tbody></table></div><figcaption><span class="it">Iteration 1</span><b>Hold probability, from the model</b>, by shear \(S\) and pull \(T\) in newtons. At 30&nbsp;N of pull it holds at most 36% of the time, and climbing in simulation peaks at 30–40&nbsp;N.</figcaption></figure>
+        <figure><div class="iter-media"><img src="media/palm2-drawing.png" width="2250" height="1600" loading="lazy" alt="Side and back views of the second palm: an EFOM-08 ball 76 mm below the array centre and 17.6 mm deep, a pitch stop, yaw stops and four springs around the ball; the force line of a leg-reposition load reaches the wall 131 mm above the array centre."></div><figcaption><span class="it">Iteration 2</span><b>The ball moves in.</b> An EFOM-08 ball 17.6&nbsp;mm deep and 76&nbsp;mm below \(C\), a 3.68&nbsp;mm pitch stop, yaw stops and four springs around it. The force line still misses \(C\): a leg-reposition load at about 5° reaches the wall 131&nbsp;mm above it.</figcaption></figure>
+        <figure><div class="iter-media"><img src="media/palm2-cad.jpg" width="900" height="1206" loading="lazy" alt="CAD render of the second palm: four rows of three spine units on a narrow plate, with a ball mount on the forearm bracket below."></div><figcaption><span class="it">Iteration 2 · CAD</span>Four rows of three units on a narrower plate. Closer to the surface than iteration 1, but not close enough.</figcaption></figure>
+        <figure><div class="iter-media"><img src="media/palm2-side.jpg" width="900" height="1128" loading="lazy" alt="Side view of the second palm's CAD: the unit plate stands on the ball mount and forearm bracket."></div><figcaption><span class="it">Iteration 2 · CAD</span>Side view: the plate stands on the ball mount and the forearm bracket.</figcaption></figure>
+      </div>
     </div>
   </div>
   <div class="wrap-mid block">
@@ -768,7 +784,6 @@
         </div>
       </article>
     </div>
-    <p class="scope rv">Both policies track kinematic references made before the generator. Teachers on generated references, the distilled student and the skills without a result on this page (climb down, off the wall) have not been trained yet, and climbing on the real walls has not started.</p>
   </div>
 </section>
 
@@ -811,6 +826,11 @@
     <div class="cite-note rv"><b>Citation</b>A BibTeX entry will appear here with the paper. Until then, please get in touch before citing these results.</div>
   </div>
 </section>
+
+<dialog class="lightbox" id="lightbox" aria-label="Enlarged figure">
+  <img alt="">
+  <button class="lb-close" type="button" aria-label="Close"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+</dialog>
 
 </main>
 

@@ -1,4 +1,4 @@
-// Humanoid Wall Climbing project page: menu, reveal, lazy videos, highlights carousel, comparisons, card tracks, explorers, disclosures, chapters, maths.
+// Humanoid Wall Climbing project page: menu, reveal, lazy videos, highlights carousel, comparisons, card tracks, explorers, disclosures, figure zoom, chapters, maths.
 (() => {
   const d = document;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -267,6 +267,21 @@
   };
   addEventListener('hashchange', openHash);
   openHash();
+
+  /* ---------- palm iterations: a card's figure opens larger ---------- */
+  const lb = d.getElementById('lightbox');
+  if (lb && lb.showModal) {
+    const big = lb.querySelector('img');
+    d.querySelectorAll('.iter-media > img').forEach(img => {
+      img.tabIndex = 0;
+      img.setAttribute('role', 'button');
+      img.setAttribute('aria-label', 'Enlarge: ' + img.alt);
+      const open = () => { big.src = img.currentSrc || img.src; big.alt = img.alt; lb.showModal(); };
+      img.addEventListener('click', open);
+      img.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+    });
+    lb.addEventListener('click', e => { if (e.target === lb || e.target.closest('.lb-close')) lb.close(); });
+  }
 
   /* ---------- chapters: jump within a clip; the part playing is marked ---------- */
   d.querySelectorAll('[data-chapters]').forEach(root => {

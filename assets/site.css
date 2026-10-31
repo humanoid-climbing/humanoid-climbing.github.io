@@ -226,7 +226,6 @@ sup.fn a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 .palm-pair>.ph{aspect-ratio:4/3}
 .palm-pair>.ph+.ph{aspect-ratio:1/1}
 @media (min-width:735px){.palm-pair{grid-template-columns:2.1fr 1fr;gap:20px}.palm-pair>.ph+.ph{aspect-ratio:auto}}
-.palm-cad{margin-top:20px}
 
 /* ---------- contact model: steps with equations ---------- */
 .model{margin-top:72px;border-radius:28px;background:var(--band);padding:36px 20px 28px}
@@ -388,6 +387,24 @@ html:not(.js) .scroller-bar{display:none}
 .strack.photos figcaption{margin:8px 2px 0;font-size:13px;line-height:1.4;color:var(--ink2)}
 .strack.photos figcaption span{font-family:var(--mono);color:var(--ink)}
 .strack.runs>*{flex-basis:min(44vw,196px)}
+/* palm iterations: same-size cards, each figure fitted inside a white plate */
+.strack.iters>*{flex-basis:min(84%,400px)}
+.iter-media{position:relative;aspect-ratio:4/3;border-radius:18px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.07);overflow:hidden}
+.iter-media>img{position:absolute;inset:14px;width:calc(100% - 28px);height:calc(100% - 28px);object-fit:contain}
+.iter-media.tbl{display:flex;align-items:center;padding:10px 12px}
+.iter-media>img{cursor:zoom-in}
+.iter-media:has(>img)::after{content:"";position:absolute;right:10px;bottom:10px;width:30px;height:30px;border-radius:50%;background:rgba(232,232,237,.92) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5L9 7M2.5 13.5L7 9' fill='none' stroke='%231d1d1f' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat;pointer-events:none}
+.iters figcaption{margin:12px 2px 0;font-size:14px;line-height:1.45;color:var(--ink2)}
+.iters figcaption b{color:var(--ink);font-weight:600}
+.iters .it{display:block;margin-bottom:5px;font:600 12px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--ink)}
+/* a small heat table: the value in every cell, the colour only as a second cue */
+.hold{width:100%;border-collapse:separate;border-spacing:3px;font:500 12px/1 var(--mono);font-variant-numeric:tabular-nums;color:var(--ink)}
+.hold th{padding:6px 2px;font:600 11px/1.15 var(--text);color:var(--ink2);text-align:center}
+.hold th small{display:block;font-weight:400;font-size:10px}
+.hold th.axes{text-align:left;font-size:10px;font-weight:500;white-space:nowrap}
+.hold tbody th{text-align:right;padding-right:6px;color:var(--ink);font-family:var(--mono);font-weight:600}
+.hold td{padding:9px 2px;border-radius:5px;text-align:center}
+@media (max-width:420px){.hold{border-spacing:2px;font-size:11px}.hold td{padding:7px 1px}}
 .run-step .ph{aspect-ratio:3/4;border-radius:18px}
 @media (min-width:735px){.strack{gap:16px}.strack.photos figcaption{font-size:14px}}
 .model.in-panel{margin-top:0}
@@ -426,16 +443,22 @@ details.more .stage .chain>li.hot{box-shadow:0 0 0 2px var(--blue)}
 .anim-scroll{overflow-x:auto;overscroll-behavior-x:contain;border-radius:28px}
 @media (max-width:734px){.anim-scroll{border-radius:18px}.anim{min-width:680px;border-radius:18px}.anim-hint{margin:12px 0 0}.chapters button{height:34px;padding:0 13px;font-size:13px}}
 
-/* results: a task label over each task's heading; the closing scope note */
+/* results: a task label over each task's heading */
 .task-head .lede{margin-top:16px}
-.scope{margin:40px auto 0;max-width:46em;text-align:center;font-size:15px;line-height:1.5;color:var(--ink2)}
-.scope b{color:var(--ink);font-weight:600}
 
 /* supplementary: collapsed blocks at the end of the page */
 #supp .hl-head{margin-bottom:8px}
 #supp details.more .stack{margin-top:24px}
 #supp .run-note{margin-bottom:0}
 .squat-pair{max-width:640px;margin:32px auto 0}
+
+/* ---------- a figure opened larger ---------- */
+.lightbox{max-width:min(1240px,94vw);max-height:92vh;padding:0;border:0;border-radius:18px;background:#fff;box-shadow:0 30px 80px rgba(0,0,0,.25);overflow:hidden}
+.lightbox::backdrop{background:rgba(0,0,0,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.lightbox img{display:block;width:auto;height:auto;max-width:min(1240px,94vw);max-height:92vh;object-fit:contain}
+.lb-close{position:absolute;top:12px;right:12px;width:38px;height:38px;padding:0;border:0;border-radius:50%;background:rgba(232,232,237,.92);color:var(--ink);display:grid;place-items:center}
+.lb-close:hover{background:var(--hair)}
+.lb-close svg{width:14px;height:14px}
 
 /* ---------- status key at the end of the page ---------- */
 .keys{display:grid;gap:16px;margin-top:40px}
@@ -444,7 +467,6 @@ details.more .stage .chain>li.hot{box-shadow:0 0 0 2px var(--blue)}
 .key h3{margin:0;font:600 21px/1.2 var(--display);letter-spacing:-.01em}
 .key p{margin:8px 0 0;font-size:15px;line-height:1.47;color:var(--ink2)}
 .key .key-items{color:var(--ink);font-weight:500}
-#status-key .scope{margin-top:32px}
 @media (min-width:900px){.keys{grid-template-columns:1fr 1fr;gap:20px}.key{padding:32px 30px}}
 
 /* ---------- notes, team, footer ---------- */
