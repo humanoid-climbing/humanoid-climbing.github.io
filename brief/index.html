@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Humanoid Wall Climbing · A short tour</title>
+<!-- shared by link ahead of the paper: kept out of search results and off the main page -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="A humanoid robot learning to climb walls with palms of tiny steel hooks. A short tour of work in progress at Stanford University.">
+<meta name="author" content="Shixuan (Alan) Zhao">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=778e8248">
+<link rel="preload" as="image" href="../media/hero-policy90.jpg" fetchpriority="high">
+<!-- inline so the reveal styles (.js .rv) apply from the first paint -->
+<script>document.documentElement.classList.add("js")</script>
+<script defer src="../assets/site.js?v=95553cb0" onerror="document.documentElement.classList.remove('js')"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<nav class="nav" aria-label="Humanoid Wall Climbing">
+  <a class="nav-title" href="#top"><span class="t-full">Humanoid Wall Climbing</span><span class="t-short">Wall Climbing</span></a>
+  <span style="flex:1"></span>
+  <a class="pill out" href="#walls">Test walls</a>
+  <a class="pill solid" href="mailto:sxuan@stanford.edu">Contact</a>
+</nav>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <p class="eyebrow rv">Humanoid Wall Climbing</p>
+    <h1 class="hx rv">Walls are <br>terrain, too.</h1>
+    <p class="hero-sub rv">We are teaching a full-size humanoid robot to climb walls. Its hands and feet carry palms of tiny steel hooks, called micro-spines, that catch on the small bumps of rough surfaces such as concrete and stucco.</p>
+  </div>
+  <div class="wrap-mid hero-stage">
+    <div class="ph media rv" data-auto>
+      <video data-src="../media/hero-policy90.mp4" poster="../media/hero-policy90.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="In simulation, a humanoid with spine palms on its hands and feet holds a vertical wall and steps its limbs through a climbing cycle."></video>
+      <span class="tag sim"><i></i>Simulation · vertical wall</span>
+      <button class="vbtn" type="button" aria-label="Pause the video"><svg viewBox="0 0 18 18" aria-hidden="true"><path class="i-pause" d="M4 2.5h3.4v13H4zM10.6 2.5H14v13h-3.4z" fill="currentColor"/><path class="i-play" d="M5 2.5v13l11-6.5z" fill="currentColor"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- HIGHLIGHTS -->
+<section class="sec band" id="highlights" aria-roledescription="carousel" aria-label="Highlights">
+  <div class="wrap headrow">
+    <h2 class="hl-head rv">Get the highlights.</h2>
+  </div>
+  <div class="track hl-track" id="hlTrack">
+    <article class="hcard" aria-roledescription="slide" aria-label="1 of 3">
+      <h3>Up the corner of a tall box, one limb at a time.<br>Each grip and release planned in simulation.</h3>
+      <div class="ph media">
+        <video data-src="../media/ref-corner.mp4" poster="../media/ref-corner.jpg" muted playsinline preload="none" disablepictureinpicture aria-label="A simulated humanoid climbs the exterior corner of a tall box one limb at a time, its spine palms on both faces of the corner."></video>
+        <span class="tag sim"><i></i>Simulation · planned motion</span>
+      </div>
+    </article>
+    <article class="hcard" aria-roledescription="slide" aria-label="2 of 3">
+      <h3>One spine palm flips a cinder block.<br>By hand, and in simulation.</h3>
+      <div class="ph media">
+        <video class="fit" data-src="../media/flip-pair.mp4" data-src-sm="../media/flip-pair-sm.mp4" poster="../media/flip-pair.jpg" data-poster-sm="../media/flip-pair-sm.jpg" muted playsinline preload="none" disablepictureinpicture aria-label="Left: a person hooks a hand-held spine palm onto a cinder block and flips it upright. Right: the simulated humanoid does the same."></video>
+        <span class="tag hw"><i></i>By hand and in simulation</span>
+      </div>
+    </article>
+    <article class="hcard" aria-roledescription="slide" aria-label="3 of 3">
+      <h3>Micro-spines can carry a person up a concrete wall.<br>A professional climber, in earlier work from our lab.</h3>
+      <div class="ph media">
+        <video data-src="../media/human-climb.mp4" poster="../media/human-climb.jpg" muted playsinline preload="none" disablepictureinpicture aria-label="On a safety rope, a climber scales the concrete-block wall of a building with a hand-held spine plate in each hand."></video>
+        <span class="tag hw"><i></i>Real · earlier work</span>
+      </div>
+    </article>
+  </div>
+  <div class="pager-row">
+    <div class="pager" id="hlPager" role="group" aria-label="Choose a highlight"></div>
+    <button class="playbtn" id="hlPlay" type="button" aria-label="Pause highlights"><svg viewBox="0 0 18 18" aria-hidden="true"><path class="i-pause" d="M4 2.5h3.4v13H4zM10.6 2.5H14v13h-3.4z" fill="currentColor"/><path class="i-play" d="M5 2.5v13l11-6.5z" fill="currentColor"/></svg></button>
+  </div>
+</section>
+
+<!-- SPINES -->
+<section class="sec" id="spines">
+  <div class="wrap-copy story-head">
+    <p class="eyebrow rv">Micro-spines</p>
+    <h2 class="hx rv">Tiny hooks, <br>each on its own spring.</h2>
+    <p class="lede rv">A spine catches on a bump only when it is dragged along the surface the right way. Real walls are uneven, so <b>each spine rides on its own spring and finds its own bump.</b> Twelve such units make one palm. The design builds on compliant spines from Mark Cutkosky's lab at Stanford.</p>
+  </div>
+  <div class="wrap block">
+    <div class="palm-pair">
+      <div class="ph media rv">
+        <img src="../media/palm-tile.jpg" width="1600" height="1200" loading="lazy" alt="One spine unit: a clear block holding a grid of small springs, each with a spine through it.">
+        <span class="tag hw"><i></i>One spine unit</span>
+      </div>
+      <div class="ph media rv" data-auto>
+        <video data-src="../media/spine-assembly.mp4" poster="../media/spine-assembly.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="Gloved hands assembling spines for a unit."></video>
+        <span class="tag hw"><i></i>Assembly</span>
+      </div>
+    </div>
+  </div>
+  <div class="wrap block">
+    <div class="block-head">
+      <h3 class="sub-head rv">Every grip can let go.</h3>
+    </div>
+    <div class="split">
+      <div class="ph media rv" style="aspect-ratio:16/9" data-auto>
+        <video data-src="../media/unit-test.mp4" poster="../media/unit-test.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="Close-up of one spine unit on a robot arm's flange, pressed against the top of a cinder block."></video>
+        <span class="tag hw"><i></i>Real · bench test</span>
+        <button class="vbtn" type="button" aria-label="Pause the video"><svg viewBox="0 0 18 18" aria-hidden="true"><path class="i-pause" d="M4 2.5h3.4v13H4zM10.6 2.5H14v13h-3.4z" fill="currentColor"/><path class="i-play" d="M5 2.5v13l11-6.5z" fill="currentColor"/></svg></button>
+      </div>
+      <div class="rv">
+        <p class="copy">A robot arm presses one unit onto a cinder block, loads it along the surface, then pulls it away from the block a little more every few seconds until it lets go. <b>Loaded along its hooks, a unit holds even while it is pulled away from the wall</b>; loaded the other way, it holds only while pressed.</p>
+        <p class="copy">No two grips are quite the same: a load that holds once may slip the next time. We measured that chance over 296 trials, and the simulator in which the robot learns to climb lets its spines grip and slip the same way.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROBOT -->
+<section class="sec band" id="robot">
+  <div class="wrap-copy story-head">
+    <p class="eyebrow rv">The robot</p>
+    <h2 class="hx rv">Spine palms <br>on a humanoid.</h2>
+    <p class="lede rv">Twelve units sit on one plate that pivots on the robot's limb, so the plate can lie flat against the wall. <b>The robot learns each move in simulation first</b>, before it touches a real wall.</p>
+  </div>
+  <div class="wrap block">
+    <div class="jrow wrap-sm rv">
+      <figure style="--ar:.722"><img src="../media/palm-cad.jpg" width="900" height="1247" loading="lazy" alt="CAD render of a spine palm: twelve spine units in three rows of four on a plate above a cylindrical mount."><figcaption>A spine palm: twelve units, in three rows of four, on one plate.</figcaption></figure>
+      <figure style="--ar:.756"><img src="../media/sim-palms.jpg" width="634" height="838" loading="lazy" alt="Simulated humanoid on a wall with green spine palms on both hands and both feet."><figcaption>In simulation, palms on both hands and both feet.</figcaption></figure>
+    </div>
+  </div>
+  <div class="wrap block">
+    <div class="split rev">
+      <div class="ph media rv" style="aspect-ratio:16/9" data-auto>
+        <video data-src="../media/ground-start.mp4" poster="../media/ground-start.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="In simulation, the humanoid stands beside an inclined wall, then places its hands and feet on it."></video>
+        <span class="tag sim"><i></i>Simulation · inclined wall</span>
+        <button class="vbtn" type="button" aria-label="Pause the video"><svg viewBox="0 0 18 18" aria-hidden="true"><path class="i-pause" d="M4 2.5h3.4v13H4zM10.6 2.5H14v13h-3.4z" fill="currentColor"/><path class="i-play" d="M5 2.5v13l11-6.5z" fill="currentColor"/></svg></button>
+      </div>
+      <div class="rv">
+        <h3 class="sub-head">From the ground onto the wall.</h3>
+        <p class="copy" style="margin-top:14px">Standing on the floor, the robot places its hands and feet on an inclined wall, hooking each palm on the way. On a vertical wall it then climbs, as in the video at the top of this page.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEST WALLS -->
+<section class="sec" id="walls">
+  <div class="wrap-copy story-head">
+    <p class="eyebrow rv">Test walls</p>
+    <h2 class="hx rv">Walls to <br>climb on.</h2>
+    <p class="lede rv">The surface matters most: the spines need small, firm bumps to catch on. <b>We made a rough stucco panel by hand, close to a real outdoor wall</b>, and built a full-height wall on an aluminum frame.</p>
+  </div>
+  <div class="wrap block">
+    <div class="block-head"><h3 class="sub-head rv">A stucco panel, made by hand.</h3></div>
+    <div class="scroller rv" data-scroller>
+      <div class="scroller-bar">
+        <span class="count" aria-live="polite"></span>
+        <button class="arw prev" type="button" aria-label="Previous photo"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="arw next" type="button" aria-label="Next photo"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+      <div class="strack photos">
+        <figure><div class="ph media"><img src="../media/stucco-1.jpg" width="1200" height="1019" loading="lazy" alt="Metal lath, lumber and tools laid out on the ground."></div><figcaption><span>1</span> Materials: metal lath, lumber, tools.</figcaption></figure>
+        <figure><div class="ph media"><img src="../media/stucco-2.jpg" width="1200" height="929" loading="lazy" alt="Metal lath screwed onto a plywood board."></div><figcaption><span>2</span> Metal lath fixed onto a plywood backing.</figcaption></figure>
+        <figure><div class="ph media"><img src="../media/stucco-3.jpg" width="1200" height="751" loading="lazy" alt="A bag of stucco mix."></div><figcaption><span>3</span> Stucco mix.</figcaption></figure>
+        <figure><div class="ph media"><img src="../media/stucco-4.jpg" width="1200" height="900" loading="lazy" alt="Wet stucco being mixed in a bucket with a trowel."></div><figcaption><span>4</span> Mixed, then applied over the lath.</figcaption></figure>
+        <figure><div class="ph media"><img src="../media/stucco-5.jpg" width="1200" height="1318" loading="lazy" alt="The stucco panel after drying, with a rough grey surface."></div><figcaption><span>5</span> Dried overnight under a plastic sheet.</figcaption></figure>
+        <figure><div class="ph media" data-auto><video data-src="../media/stucco-spines.mp4" poster="../media/stucco-spines.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="A row of spine units dragged across the dried stucco."></video></div><figcaption><span>6</span> Spines on the finished surface.</figcaption></figure>
+      </div>
+    </div>
+  </div>
+  <div class="wrap block">
+    <div class="block-head"><h3 class="sub-head rv">A full-height wall frame.</h3></div>
+    <div class="jrow wrap-sm rv">
+      <figure style="--ar:.75"><img src="../media/wall-1.jpg" width="1200" height="1600" loading="lazy" alt="A tall test wall panel standing in an aluminum-extrusion frame outdoors."><figcaption>The wall panel in its aluminum-extrusion frame.</figcaption></figure>
+      <figure style="--ar:1.333"><img src="../media/wall-2.jpg" width="1600" height="1200" loading="lazy" alt="The wall frame from the side, with a plywood panel and diagonal braces."><figcaption>From the side: a plywood panel on diagonal braces.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="sec band team" id="team">
+  <div class="wrap">
+    <p class="eyebrow rv">Work in progress · paper in preparation</p>
+    <h2 class="rv">Humanoid Wall Climbing with Compliant Spines</h2>
+    <p class="authors rv">
+      <span>Shixuan Zhao<sup>1</sup></span>
+      <span>Sam Xie<sup>1</sup></span>
+      <span>Hao Li<sup>1</sup></span>
+      <span>Hayi Zhao<sup>1</sup></span>
+      <span>Justin Chen<sup>1</sup></span>
+      <span>Teo Ren<sup>1</sup></span>
+      <span>Sirui Chen<sup>1</sup></span>
+      <span>Zhanpeng He<sup>1</sup></span>
+      <span>Qi Wu<sup>2</sup></span>
+      <span>C. Karen Liu<sup>1</sup></span>
+      <span>Mark R. Cutkosky<sup>1</sup></span>
+    </p>
+    <p class="affil rv"><span><sup>1</sup>Stanford University</span><span><sup>2</sup>Cornell University</span></p>
+    <div class="btns rv">
+      <a class="btn" href="mailto:sxuan@stanford.edu">Contact</a>
+    </div>
+    <div class="cite-note rv" style="background:var(--page)"><b>Not yet published</b>This page previews work in progress ahead of the paper. Please don't forward it for now. Thank you!</div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Humanoid Wall Climbing · Stanford University</span>
+  </div>
+</footer>
+
+</body>
+</html>
