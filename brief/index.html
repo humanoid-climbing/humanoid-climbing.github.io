@@ -25,7 +25,6 @@
 <nav class="nav" aria-label="Humanoid Wall Climbing">
   <a class="nav-title" href="#top"><span class="t-full">Humanoid Wall Climbing</span><span class="t-short">Wall Climbing</span></a>
   <span style="flex:1"></span>
-  <a class="pill out" href="#walls">Test walls</a>
   <a class="pill solid" href="mailto:sxuan@stanford.edu">Contact</a>
 </nav>
 
@@ -54,7 +53,7 @@
   </div>
   <div class="track hl-track" id="hlTrack">
     <article class="hcard" aria-roledescription="slide" aria-label="1 of 3">
-      <h3>Up the corner of a tall box, one limb at a time.<br>Each grip and release planned in simulation.</h3>
+      <h3>Up the corner of a tall box, one limb at a time.</h3>
       <div class="ph media">
         <video data-src="../media/ref-corner.mp4" poster="../media/ref-corner.jpg" muted playsinline preload="none" disablepictureinpicture aria-label="A simulated humanoid climbs the exterior corner of a tall box one limb at a time, its spine palms on both faces of the corner."></video>
         <span class="tag sim"><i></i>Simulation · planned motion</span>
@@ -100,20 +99,14 @@
       </div>
     </div>
   </div>
-  <div class="wrap block">
+  <div class="wrap-mid block">
     <div class="block-head">
       <h3 class="sub-head rv">Every grip can let go.</h3>
     </div>
-    <div class="split">
-      <div class="ph media rv" style="aspect-ratio:16/9" data-auto>
-        <video data-src="../media/unit-test.mp4" poster="../media/unit-test.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="Close-up of one spine unit on a robot arm's flange, pressed against the top of a cinder block."></video>
-        <span class="tag hw"><i></i>Real · bench test</span>
-        <button class="vbtn" type="button" aria-label="Pause the video"><svg viewBox="0 0 18 18" aria-hidden="true"><path class="i-pause" d="M4 2.5h3.4v13H4zM10.6 2.5H14v13h-3.4z" fill="currentColor"/><path class="i-play" d="M5 2.5v13l11-6.5z" fill="currentColor"/></svg></button>
-      </div>
-      <div class="rv">
-        <p class="copy">A robot arm presses one unit onto a cinder block, loads it along the surface, then pulls it away from the block a little more every few seconds until it lets go. <b>Loaded along its hooks, a unit holds even while it is pulled away from the wall</b>; loaded the other way, it holds only while pressed.</p>
-        <p class="copy">No two grips are quite the same: a load that holds once may slip the next time. We measured that chance over 296 trials, and the simulator in which the robot learns to climb lets its spines grip and slip the same way.</p>
-      </div>
+    <div class="ph media rv" style="aspect-ratio:16/9" data-auto>
+      <video data-src="../media/unit-test.mp4" poster="../media/unit-test.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="Close-up of one spine unit on a robot arm's flange, pressed against the top of a cinder block."></video>
+      <span class="tag hw"><i></i>Real · bench test</span>
+      <button class="vbtn" type="button" aria-label="Pause the video"><svg viewBox="0 0 18 18" aria-hidden="true"><path class="i-pause" d="M4 2.5h3.4v13H4zM10.6 2.5H14v13h-3.4z" fill="currentColor"/><path class="i-play" d="M5 2.5v13l11-6.5z" fill="currentColor"/></svg></button>
     </div>
   </div>
 </section>
