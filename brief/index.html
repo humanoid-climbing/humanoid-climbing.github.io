@@ -25,6 +25,15 @@
 .g-unit{grid-template-rows:3fr 2fr}
 .g-two{grid-template-columns:1fr 1fr}
 .g-six{grid-template-columns:1fr 1fr}
+/* eleven dots and the play button in one row on a phone */
+@media (max-width:734px){
+  .pager-row{gap:10px}
+  .pager{padding:0 8px}
+  .dot{width:18px}
+  .dot.on{width:40px}
+  .dot.on i{width:28px}
+  .playbtn{width:48px;height:48px}
+}
 @media (min-width:735px){
   .hero{padding-bottom:96px}
   .hcard.bare{padding-top:40px}
