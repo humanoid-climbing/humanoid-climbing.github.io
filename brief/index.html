@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Humanoid Wall Climbing · A short tour</title>
+<title>Humanoid Wall Climbing · Highlights</title>
 <!-- shared by link ahead of the paper: kept out of search results and off the main page -->
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="A 1.3 m humanoid robot learning to climb walls with micro-spines. A short tour of work in progress at Stanford University.">
+<meta name="description" content="Highlights from work in progress on humanoid wall climbing at Stanford University.">
 <meta name="author" content="Shixuan (Alan) Zhao">
 <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
@@ -14,10 +14,29 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/site.css?v=778e8248">
+<style>
+/* this page only: a title without a stage, cards holding several photos, and figures shown without a heading */
+.hero{padding-bottom:72px}
+.hgrid{flex:1;width:100%;min-height:0;display:grid;grid-auto-rows:1fr;gap:10px}
+.hgrid>.ph{min-height:0;border-radius:14px}
+.ph.white{background:#fff}
+.ph.white>img{object-fit:contain}
+.hcard.bare{padding-top:20px}
+.g-unit{grid-template-rows:3fr 2fr}
+.g-two{grid-template-columns:1fr 1fr}
+.g-six{grid-template-columns:1fr 1fr}
+@media (min-width:735px){
+  .hero{padding-bottom:96px}
+  .hcard.bare{padding-top:40px}
+  .g-unit{grid-template-columns:2.1fr 1fr;grid-template-rows:none}
+  .g-six{grid-template-columns:repeat(3,1fr)}
+  .g-wall{grid-template-columns:3fr 5.3fr}
+}
+</style>
 <link rel="preload" as="image" href="../media/hero-policy90.jpg" fetchpriority="high">
 <!-- inline so the reveal styles (.js .rv) apply from the first paint -->
 <script>document.documentElement.classList.add("js")</script>
-<script defer src="../assets/site.js?v=95553cb0" onerror="document.documentElement.classList.remove('js')"></script>
+<script defer src="../assets/site.js?v=2dd6bf3b" onerror="document.documentElement.classList.remove('js')"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -34,43 +53,103 @@
 <section class="hero" id="top">
   <div class="wrap">
     <p class="eyebrow rv">Humanoid Wall Climbing</p>
-    <h1 class="hx rv">Teaching a humanoid <br>to climb walls.</h1>
-    <p class="hero-sub rv">Our 1.3&nbsp;m humanoid has micro-spines on its hands and feet: tiny steel hooks that catch on rough walls like concrete.</p>
-  </div>
-  <div class="wrap-mid hero-stage">
-    <div class="ph media rv" data-auto>
-      <video data-src="../media/hero-policy90.mp4" poster="../media/hero-policy90.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="In simulation, a humanoid with a spine pad on each arm and leg holds a vertical wall and steps its limbs through a climbing cycle."></video>
-      <span class="tag sim"><i></i>Simulation · vertical wall</span>
-      <button class="vbtn" type="button" aria-label="Pause the video"><svg viewBox="0 0 18 18" aria-hidden="true"><path class="i-pause" d="M4 2.5h3.4v13H4zM10.6 2.5H14v13h-3.4z" fill="currentColor"/><path class="i-play" d="M5 2.5v13l11-6.5z" fill="currentColor"/></svg></button>
-    </div>
+    <h1 class="hx rv">Walls are <br>terrain, too.</h1>
   </div>
 </section>
 
-<!-- HIGHLIGHTS -->
+<!-- HIGHLIGHTS: every clip and photo of this page, one card at a time; a card without a clip holds for data-still seconds -->
 <section class="sec band" id="highlights" aria-roledescription="carousel" aria-label="Highlights">
   <div class="wrap headrow">
     <h2 class="hl-head rv">Highlights.</h2>
   </div>
   <div class="track hl-track" id="hlTrack">
-    <article class="hcard" aria-roledescription="slide" aria-label="1 of 3">
+    <article class="hcard" aria-roledescription="slide" aria-label="1 of 11">
+      <h3>Climbing a vertical wall, in simulation.</h3>
+      <div class="ph media">
+        <video data-src="../media/hero-policy90.mp4" poster="../media/hero-policy90.jpg" muted playsinline preload="none" disablepictureinpicture aria-label="In simulation, a humanoid with spine pads on its hands and feet holds a vertical wall and steps its limbs through a climbing cycle."></video>
+        <span class="tag sim"><i></i>Simulation · vertical wall</span>
+      </div>
+    </article>
+    <article class="hcard" aria-roledescription="slide" aria-label="2 of 11">
       <h3>Up the outside corner of a tall box, one limb at a time.</h3>
       <div class="ph media">
         <video data-src="../media/ref-corner.mp4" poster="../media/ref-corner.jpg" muted playsinline preload="none" disablepictureinpicture aria-label="A simulated humanoid climbs the outside corner of a tall box one limb at a time, its spine pads on both faces of the corner."></video>
         <span class="tag sim"><i></i>Simulation · planned motion</span>
       </div>
     </article>
-    <article class="hcard" aria-roledescription="slide" aria-label="2 of 3">
+    <article class="hcard" aria-roledescription="slide" aria-label="3 of 11">
       <h3>One spine pad flips a cinder block.<br>By hand, and by the robot in simulation.</h3>
       <div class="ph media">
         <video class="fit" data-src="../media/flip-pair.mp4" data-src-sm="../media/flip-pair-sm.mp4" poster="../media/flip-pair.jpg" data-poster-sm="../media/flip-pair-sm.jpg" muted playsinline preload="none" disablepictureinpicture aria-label="Left: a person hooks a hand-held spine pad onto a cinder block and flips it upright. Right: the simulated humanoid does the same."></video>
         <span class="tag hw"><i></i>Real · simulation</span>
       </div>
     </article>
-    <article class="hcard" aria-roledescription="slide" aria-label="3 of 3">
+    <article class="hcard" aria-roledescription="slide" aria-label="4 of 11">
       <h3>Micro-spines can carry a person up a concrete wall.<br>A professional climber, in earlier work from our lab.</h3>
       <div class="ph media">
         <video data-src="../media/human-climb.mp4" poster="../media/human-climb.jpg" muted playsinline preload="none" disablepictureinpicture aria-label="On a safety rope, a climber scales the concrete-block wall of a building with a hand-held spine plate in each hand."></video>
         <span class="tag hw"><i></i>Real · earlier work</span>
+      </div>
+    </article>
+    <article class="hcard" aria-roledescription="slide" aria-label="5 of 11">
+      <h3>Tiny hooks, each on its own spring.</h3>
+      <div class="hgrid g-unit">
+        <div class="ph media">
+          <img src="../media/palm-tile.jpg" width="1600" height="1200" fetchpriority="low" alt="One spine unit: a clear block holding a grid of small springs, each with a spine through it.">
+          <span class="tag hw"><i></i>One spine unit</span>
+        </div>
+        <div class="ph media">
+          <video data-src="../media/spine-assembly.mp4" poster="../media/spine-assembly.jpg" muted playsinline preload="none" disablepictureinpicture aria-label="Gloved hands assembling spines for a unit."></video>
+          <span class="tag hw"><i></i>Assembly</span>
+        </div>
+      </div>
+    </article>
+    <article class="hcard" aria-roledescription="slide" aria-label="6 of 11">
+      <h3>Testing a spine unit on a robot arm.</h3>
+      <div class="ph media">
+        <video data-src="../media/unit-test.mp4" poster="../media/unit-test.jpg" muted playsinline preload="none" disablepictureinpicture aria-label="Close-up of one spine unit on a robot arm's flange, pressed against the top of a cinder block."></video>
+        <span class="tag hw"><i></i>Real · bench test</span>
+      </div>
+    </article>
+    <article class="hcard bare" aria-roledescription="slide" aria-label="7 of 11">
+      <div class="ph media white">
+        <video class="fit" data-src="../media/palm-model.mp4" poster="../media/palm-model.jpg" muted playsinline preload="none" disablepictureinpicture aria-label="Animation of the spine contact model."></video>
+      </div>
+    </article>
+    <article class="hcard" aria-roledescription="slide" aria-label="8 of 11" data-still="8">
+      <h3>Spine pads on a humanoid.</h3>
+      <div class="hgrid g-two">
+        <div class="ph media white">
+          <img src="../media/palm-cad.jpg" width="900" height="1247" fetchpriority="low" alt="CAD render of a spine pad: twelve spine units in three rows of four on a plate above a cylindrical mount.">
+          <span class="tag"><i></i>Spine pad · CAD</span>
+        </div>
+        <div class="ph media white">
+          <img src="../media/pad-mount.jpg" width="378" height="493" fetchpriority="low" alt="CAD render, side view: a spine pad held beside a cylindrical robot limb by two clamp collars, joined to them through a ball joint.">
+          <span class="tag"><i></i>Mount · CAD</span>
+        </div>
+      </div>
+    </article>
+    <article class="hcard bare" aria-roledescription="slide" aria-label="9 of 11" data-still="10">
+      <div class="ph media white">
+        <img src="../media/pipeline.png" width="2400" height="978" fetchpriority="low" alt="Diagram of the reference generation pipeline.">
+      </div>
+    </article>
+    <article class="hcard" aria-roledescription="slide" aria-label="10 of 11">
+      <h3>A stucco panel, made by hand.</h3>
+      <div class="hgrid g-six">
+        <div class="ph media"><img src="../media/stucco-1.jpg" width="1200" height="1019" fetchpriority="low" alt="Metal lath, lumber and tools laid out on the ground."></div>
+        <div class="ph media"><img src="../media/stucco-2.jpg" width="1200" height="929" fetchpriority="low" alt="Metal lath screwed onto a plywood board."></div>
+        <div class="ph media"><img src="../media/stucco-3.jpg" width="1200" height="751" fetchpriority="low" alt="A bag of stucco mix."></div>
+        <div class="ph media"><img src="../media/stucco-4.jpg" width="1200" height="900" fetchpriority="low" alt="Wet stucco being mixed in a bucket with a trowel."></div>
+        <div class="ph media"><img src="../media/stucco-5.jpg" width="1200" height="1318" fetchpriority="low" alt="The stucco panel after drying, with a rough grey surface."></div>
+        <div class="ph media"><video data-src="../media/stucco-spines.mp4" poster="../media/stucco-spines.jpg" muted playsinline preload="none" disablepictureinpicture aria-label="A row of spine units dragged across the dried stucco."></video></div>
+      </div>
+    </article>
+    <article class="hcard" aria-roledescription="slide" aria-label="11 of 11" data-still="6">
+      <h3>A tall wall frame.</h3>
+      <div class="hgrid g-wall">
+        <div class="ph media"><img src="../media/wall-1.jpg" width="1200" height="1600" fetchpriority="low" alt="A tall test wall panel standing in an aluminum-extrusion frame outdoors."></div>
+        <div class="ph media"><img src="../media/wall-2.jpg" width="1600" height="1200" fetchpriority="low" alt="The wall frame from the side, with a plywood panel and diagonal braces."></div>
       </div>
     </article>
   </div>
@@ -80,109 +159,14 @@
   </div>
 </section>
 
-<!-- SPINES -->
-<section class="sec" id="spines">
+<!-- COMING SOON -->
+<section class="sec" id="soon">
   <div class="wrap-copy story-head">
-    <p class="eyebrow rv">Micro-spines</p>
-    <h2 class="hx rv">Tiny hooks, <br>each on its own spring.</h2>
-    <p class="lede rv">Each spine rides on its own spring, so <b>every spine finds its own bump</b> on an uneven wall.</p>
-  </div>
-  <div class="wrap block">
-    <div class="palm-pair">
-      <div class="ph media rv">
-        <img src="../media/palm-tile.jpg" width="1600" height="1200" loading="lazy" alt="One spine unit: a clear block holding a grid of small springs, each with a spine through it.">
-        <span class="tag hw"><i></i>One spine unit</span>
-      </div>
-      <div class="ph media rv" data-auto>
-        <video data-src="../media/spine-assembly.mp4" poster="../media/spine-assembly.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="Gloved hands assembling spines for a unit."></video>
-        <span class="tag hw"><i></i>Assembling spines</span>
-      </div>
-    </div>
-  </div>
-  <div class="wrap-mid block">
-    <div class="block-head">
-      <h3 class="sub-head rv">Testing a spine unit on a robot arm.</h3>
-      <p class="lede rv">The arm pulls the unit off a cinder block to measure how much it can hold.</p>
-    </div>
-    <div class="ph media rv" style="aspect-ratio:16/9" data-auto>
-      <video data-src="../media/unit-test.mp4" poster="../media/unit-test.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="Close-up of one spine unit on a robot arm's flange, pressed against the top of a cinder block."></video>
-      <span class="tag hw"><i></i>Real · bench test</span>
-      <button class="vbtn" type="button" aria-label="Pause the video"><svg viewBox="0 0 18 18" aria-hidden="true"><path class="i-pause" d="M4 2.5h3.4v13H4zM10.6 2.5H14v13h-3.4z" fill="currentColor"/><path class="i-play" d="M5 2.5v13l11-6.5z" fill="currentColor"/></svg></button>
-    </div>
-  </div>
-</section>
-
-<!-- ROBOT -->
-<section class="sec band" id="robot">
-  <div class="wrap-copy story-head">
-    <p class="eyebrow rv">On the robot</p>
-    <h2 class="hx rv">Spine pads <br>on a humanoid.</h2>
-  </div>
-  <div class="wrap block">
-    <div class="jrow wrap-sm rv">
-      <figure style="--ar:.722"><img src="../media/palm-cad.jpg" width="900" height="1247" loading="lazy" alt="CAD render of a spine pad: twelve spine units in three rows of four on a plate above a cylindrical mount."><figcaption>A spine pad (CAD).</figcaption></figure>
-      <figure style="--ar:.767"><img src="../media/pad-mount.jpg" width="378" height="493" loading="lazy" alt="CAD render, side view: a spine pad held beside a cylindrical robot limb by two clamp collars, joined to them through a ball joint."><figcaption>Mounted on a limb (CAD).</figcaption></figure>
-    </div>
-  </div>
-</section>
-
-<!-- TEST WALLS -->
-<section class="sec" id="walls">
-  <div class="wrap-copy story-head">
-    <p class="eyebrow rv">Test walls</p>
-    <h2 class="hx rv">Building walls <br>to test on.</h2>
-    <p class="lede rv">Spines need a rough surface, so <b>we make our own test walls.</b></p>
-  </div>
-  <div class="wrap block">
-    <div class="block-head"><h3 class="sub-head rv">A stucco panel, made by hand.</h3></div>
-    <div class="scroller rv" data-scroller>
-      <div class="scroller-bar">
-        <span class="count" aria-live="polite"></span>
-        <button class="arw prev" type="button" aria-label="Previous photo"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <button class="arw next" type="button" aria-label="Next photo"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      </div>
-      <div class="strack photos">
-        <figure><div class="ph media"><img src="../media/stucco-1.jpg" width="1200" height="1019" loading="lazy" alt="Metal lath, lumber and tools laid out on the ground."></div><figcaption><span>1</span> Materials.</figcaption></figure>
-        <figure><div class="ph media"><img src="../media/stucco-2.jpg" width="1200" height="929" loading="lazy" alt="Metal lath screwed onto a plywood board."></div><figcaption><span>2</span> Metal lath on plywood.</figcaption></figure>
-        <figure><div class="ph media"><img src="../media/stucco-3.jpg" width="1200" height="751" loading="lazy" alt="A bag of stucco mix."></div><figcaption><span>3</span> Stucco mix.</figcaption></figure>
-        <figure><div class="ph media"><img src="../media/stucco-4.jpg" width="1200" height="900" loading="lazy" alt="Wet stucco being mixed in a bucket with a trowel."></div><figcaption><span>4</span> Applied over the lath.</figcaption></figure>
-        <figure><div class="ph media"><img src="../media/stucco-5.jpg" width="1200" height="1318" loading="lazy" alt="The stucco panel after drying, with a rough grey surface."></div><figcaption><span>5</span> Dried overnight.</figcaption></figure>
-        <figure><div class="ph media" data-auto><video data-src="../media/stucco-spines.mp4" poster="../media/stucco-spines.jpg" muted loop playsinline preload="none" disablepictureinpicture aria-label="A row of spine units dragged across the dried stucco."></video></div><figcaption><span>6</span> Spines on the finished panel.</figcaption></figure>
-      </div>
-    </div>
-  </div>
-  <div class="wrap block">
-    <div class="block-head"><h3 class="sub-head rv">A tall wall frame.</h3></div>
-    <div class="jrow wrap-sm rv">
-      <figure style="--ar:.75"><img src="../media/wall-1.jpg" width="1200" height="1600" loading="lazy" alt="A tall test wall panel standing in an aluminum-extrusion frame outdoors."><figcaption>The wall in its aluminum frame.</figcaption></figure>
-      <figure style="--ar:1.333"><img src="../media/wall-2.jpg" width="1600" height="1200" loading="lazy" alt="The wall frame from the side, with a plywood panel and diagonal braces."><figcaption>From the side.</figcaption></figure>
-    </div>
-  </div>
-</section>
-
-<!-- TEAM -->
-<section class="sec band team" id="team">
-  <div class="wrap">
-    <p class="eyebrow rv">Work in progress · paper in preparation</p>
-    <h2 class="rv">Humanoid Wall Climbing with Compliant Spines</h2>
-    <p class="authors rv">
-      <span>Shixuan Zhao<sup>1</sup></span>
-      <span>Sam Xie<sup>1</sup></span>
-      <span>Hao Li<sup>1</sup></span>
-      <span>Hayi Zhao<sup>1</sup></span>
-      <span>Justin Chen<sup>1</sup></span>
-      <span>Teo Ren<sup>1</sup></span>
-      <span>Sirui Chen<sup>1</sup></span>
-      <span>Zhanpeng He<sup>1</sup></span>
-      <span>Qi Wu<sup>2</sup></span>
-      <span>C. Karen Liu<sup>1</sup></span>
-      <span>Mark R. Cutkosky<sup>1</sup></span>
-    </p>
-    <p class="affil rv"><span><sup>1</sup>Stanford University</span><span><sup>2</sup>Cornell University</span></p>
+    <h2 class="hx rv">Coming soon.</h2>
     <div class="btns rv">
       <a class="btn" href="mailto:sxuan@stanford.edu">Contact</a>
     </div>
-    <div class="cite-note rv" style="background:var(--page)"><b>Not yet published</b>This page previews work in progress ahead of the paper. Please don't forward it for now. Thank you!</div>
+    <div class="cite-note rv"><b>Not yet published</b>This page previews work in progress ahead of the paper. Please don't forward it for now. Thank you!</div>
   </div>
 </section>
 

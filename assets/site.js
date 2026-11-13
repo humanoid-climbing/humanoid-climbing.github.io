@@ -91,10 +91,46 @@
   }
 
   /* ---------- highlights: one card at a time; the active dot fills as its clip plays ---------- */
+  // A card of stills has no clip, so a timer of ms stands in for one, with the part of a video's interface used below.
+  const still = ms => {
+    const on = {};
+    const fire = type => (on[type] || []).forEach(f => f());
+    let at = 0, t0 = 0, tick = 0, done = 0;
+    const v = {
+      dataset: {}, getAttribute: () => null, duration: ms / 1000, paused: true, ended: false,
+      addEventListener: (type, f) => (on[type] = on[type] || []).push(f),
+      get currentTime() { return (at + (v.paused ? 0 : performance.now() - t0)) / 1000; },
+      set currentTime(s) {
+        const was = !v.paused;
+        v.pause();
+        at = s * 1000;
+        v.ended = false;
+        if (was) v.play();
+      },
+      play() {
+        if (v.paused) {
+          if (v.ended) { at = 0; v.ended = false; }
+          v.paused = false;
+          t0 = performance.now();
+          tick = setInterval(() => fire('timeupdate'), 100);
+          done = setTimeout(() => { v.pause(); v.ended = true; fire('timeupdate'); fire('ended'); }, Math.max(0, ms - at));
+        }
+        return Promise.resolve();
+      },
+      pause() {
+        if (v.paused) return;
+        clearInterval(tick);
+        clearTimeout(done);
+        at = Math.min(ms, at + performance.now() - t0);
+        v.paused = true;
+      },
+    };
+    return v;
+  };
   const track = d.getElementById('hlTrack');
   if (track) {
     const cards = [...track.children];
-    const vids = cards.map(c => c.querySelector('video'));
+    const vids = cards.map(c => c.querySelector('video') || still((+c.dataset.still || 6) * 1000));
     const pager = d.getElementById('hlPager');
     const pbtn = d.getElementById('hlPlay');
     let cur = -1;
